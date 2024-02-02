@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
-import FilterMenu, { FilterMenuModel } from "@/components/FilterMenu";
+import FilterMenu from "@/components/FilterMenu";
 import { CheckBox } from "@mui/icons-material";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -46,9 +46,7 @@ export default function Home() {
 
         <div className={styles.center}>
           <FilterMenu>
-            <FilterMenuSection>
-              <CheckBox>Hei</CheckBox>
-            </FilterMenuSection>
+            Hei!
           </FilterMenu>
         </div>
 

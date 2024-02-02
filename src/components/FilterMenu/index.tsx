@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, PropsWithChildren } from 'react';
 import Stack from '@mui/material/Container';
 
-const FilterMenu = () => {
+
+type FilterMenuProps = {
+
+};
+
+const FilterMenu = (props: PropsWithChildren<FilterMenuProps>) => {
     return (
         <Stack>
-            {
-                model.sectionModels.map((sectionModel) => (
-                    <FilterMenuSection key={sectionModel.sectionId} sectionConfig={sectionModel} />
-                ))
-            }
+            {props.children}
         </Stack>
     );
 };
