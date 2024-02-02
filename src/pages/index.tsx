@@ -1,13 +1,16 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
-import FilterMenu from "@/components/FilterMenu";
+import FilterMenu, { FilterMenuModel } from "@/components/FilterMenu";
+import { CheckBox } from "@mui/icons-material";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -42,7 +45,11 @@ export default function Home() {
         </div>
 
         <div className={styles.center}>
-          <FilterMenu />
+          <FilterMenu>
+            <FilterMenuSection>
+              <CheckBox>Hei</CheckBox>
+            </FilterMenuSection>
+          </FilterMenu>
         </div>
 
         <div className={styles.grid}>
