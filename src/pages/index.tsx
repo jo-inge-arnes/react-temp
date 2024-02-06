@@ -3,12 +3,31 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
 import FilterMenu, { FilterMenuSectionProps } from "@/components/FilterMenu";
+import { useContext } from "react";
+import FilterSettingsContext, { FilterSettings } from "@/components/FilterMenu/FilterMenuContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const MyFilterSection = (props: FilterMenuSectionProps) => {
+  const filterSettings = useContext(FilterSettingsContext);
+
+  const handleClick = () => {
+    console.log(filterSettings);
+    filterSettings?.setFilterSelection("1", ["1"])
+  };
+
   return (
-    <button onClick={props.handleSelectionChanged}>klikk mæ</button>
+    <button onClick={() => handleClick()}>klikk mæ</button>
+  );
+}
+
+export const MyFilterSection2 = (props: FilterMenuSectionProps) => {
+  const filterSettings = useContext(FilterSettingsContext);
+
+  return (
+    <div>
+      {filterSettings?.selectedFilters}
+    </div>
   );
 }
 
@@ -23,12 +42,17 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.center}>
-          <FilterMenu handleSelectionChanged={() => console.log("halloisen!")}>
+          <FilterMenu>
             <MyFilterSection
               filterSectionId="1"
-              filterSectionTitle="Filter 1">
-
+              filterSectionTitle="Filter 1"
+            >
             </MyFilterSection>
+            <MyFilterSection2
+              filterSectionId="2"
+              filterSectionTitle="Filter 2"
+            >
+            </MyFilterSection2>
           </FilterMenu>
         </div >
       </main >

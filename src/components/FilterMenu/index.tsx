@@ -1,40 +1,52 @@
-import { ReactElement, PropsWithChildren, cloneElement } from 'react';
+import { ReactElement, PropsWithChildren } from 'react';
 import Stack from '@mui/material/Container';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import FilterSettingsContext, { FilterSettings } from './FilterSettingsContext';
 
 export type FilterMenuSection = PropsWithChildren<{
-    handleSelectionChanged: () => void;
     children: ReactElement<FilterMenuSectionProps> | ReactElement<FilterMenuSectionProps>[];
 }>;
 
 export type FilterMenuSectionProps = PropsWithChildren<{
     filterSectionId: string | number;
     filterSectionTitle: string;
-    handleSelectionChanged?: () => void;
 }>;
 
-const FilterMenu = ({ handleSelectionChanged, children }: FilterMenuSection) => {
-    const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
-        const { filterSectionId, filterSectionTitle } = elmt.props;
-        elmt = cloneElement(elmt, { handleSelectionChanged: handleSelectionChanged });
+const FilterMenuSection = ({ filterSectionId, filterSectionTitle, children }: FilterMenuSectionProps) => {
+    return (
+        <Accordion key={`filtermenusection-${filterSectionId}`}>
+            <AccordionSummary>
+                {filterSectionTitle}
+            </AccordionSummary>
+            <AccordionDetails>
+                {children}
+            </AccordionDetails>
+        </Accordion>
+    );
+};
 
-        return (
-            <Accordion key={`filtermenusection-${filterSectionId}`}>
-                <AccordionSummary>
-                    {filterSectionTitle}
-                </AccordionSummary>
-                <AccordionDetails>
-                    {elmt}
-                </AccordionDetails>
-            </Accordion>
-        );
-    };
-
-    const sections = Array.isArray(children) ? children.map(buildSection) : buildSection(children);
+const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
+    const { filterSectionId, filterSectionTitle } = elmt.props;
 
     return (
+        <FilterMenuSection
+            filterSectionId={filterSectionId} 
+            filterSectionTitle={filterSectionTitle}
+        >
+            {elmt}
+        </FilterMenuSection>
+    );
+};
+
+const FilterMenu = ({ children }: FilterMenuSection) => {
+    const filterSettings = new FilterSettings();
+    const sections = Array.isArray(children) ? children.map(buildSection) : buildSection(children);
+    
+    return (
         <Stack>
-            {sections}
+            <FilterSettingsContext.Provider value={filterSettings}>
+                {sections}
+            </FilterSettingsContext.Provider>
         </Stack>
     );
 };
