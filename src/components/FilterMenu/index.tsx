@@ -1,11 +1,11 @@
-import { ReactElement, PropsWithChildren, useReducer, useState } from 'react';
+import { ReactElement, PropsWithChildren, useReducer } from 'react';
 import Stack from '@mui/material/Container';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import {
     FilterSettingsContext,
     FilterSettingsDispatchContext,
-    FilterSettings,
-    filterSettingsReducer
+    filterSettingsReducer,
+    FilterSettingsValue
 } from './FilterSettingsContext';
 
 export type FilterMenuSection = PropsWithChildren<{
@@ -31,7 +31,7 @@ const FilterMenuSection = ({ filterSectionId, filterSectionTitle, children }: Fi
 };
 
 const initialFilterSelections = () => {
-    return new Map<string, string[]>();
+    return new Map<string, FilterSettingsValue[]>();
 }
 
 const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {

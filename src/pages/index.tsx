@@ -4,7 +4,11 @@ import styles from "@/styles/Home.module.css";
 
 import FilterMenu, { FilterMenuSectionProps } from "@/components/FilterMenu";
 import { useContext, useState } from "react";
-import { FilterSettingsContext, FilterSettingsDispatchContext } from "@/components/FilterMenu/FilterSettingsContext";
+import {
+  FilterSettingsContext,
+  FilterSettingsDispatchContext,
+  FilterSettingsActionType
+} from "@/components/FilterMenu/FilterSettingsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,19 +19,17 @@ export const MyFilterSection = (props: FilterMenuSectionProps) => {
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
   const handleClick = () => {
-    if (filterSettingsDispatch != null) {
       setCount(count + 1);
       let newValues = filterSettings.get(sectionKey) || [];
-      newValues.push(count.toString());
+      newValues.push({ valueId: count.toString(), value: count.toString() });
 
       filterSettingsDispatch({
-        type: "setFilterSection",
+        type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
         sectionSetting: {
           key: sectionKey,
           values: newValues
         }
       });
-    }
   };
 
   return (
@@ -41,7 +43,7 @@ export const MyFilterSection2 = (props: FilterMenuSectionProps) => {
 
   return (
     <div>
-      {Array.from(filterSettings.get(sectionKey) ?? []).map((value) => <div key={value}>{value}</div>)}
+      {Array.from(filterSettings.get(sectionKey) ?? []).map((settingsValue) => <div key={settingsValue.valueId}>{settingsValue.value}</div>)}
     </div>
   );
 }
