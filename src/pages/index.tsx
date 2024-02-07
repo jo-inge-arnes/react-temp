@@ -4,16 +4,19 @@ import styles from "@/styles/Home.module.css";
 
 import FilterMenu, { FilterMenuSectionProps } from "@/components/FilterMenu";
 import { useContext } from "react";
-import FilterSettingsContext, { FilterSettings } from "@/components/FilterMenu/FilterMenuContext";
+import { FilterSettingsContext, FilterSettingsDispatchContext } from "@/components/FilterMenu/FilterSettingsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const MyFilterSection = (props: FilterMenuSectionProps) => {
   const filterSettings = useContext(FilterSettingsContext);
+  const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
   const handleClick = () => {
     console.log(filterSettings);
-    filterSettings?.setFilterSelection("1", ["1"])
+
+    if (filterSettingsDispatch !== null)
+      filterSettingsDispatch({ type: "addFilter" });
   };
 
   return (
@@ -23,10 +26,11 @@ export const MyFilterSection = (props: FilterMenuSectionProps) => {
 
 export const MyFilterSection2 = (props: FilterMenuSectionProps) => {
   const filterSettings = useContext(FilterSettingsContext);
+  const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
   return (
     <div>
-      {filterSettings?.selectedFilters}
+      {filterSettings?.toString()}
     </div>
   );
 }

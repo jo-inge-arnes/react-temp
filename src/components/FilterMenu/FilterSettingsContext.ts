@@ -2,7 +2,6 @@ import { createContext } from 'react';
 
 export type FilterSettingsAction = {
     type: string;
-
 };
 
 export class FilterSettings {
@@ -19,15 +18,14 @@ export class FilterSettings {
     get selectedFilters() {
         return this._selectedFilters;
     }
-
-    static filterSettingsReducer(filterSettings: FilterSettings, action: FilterSettingsAction) {
-        switch (action.type) {
-            default:
-                return filterSettings;
-        }
-    }
 };
 
-const FilterSettingsContext = createContext<FilterSettings | null>(null);
+export function filterSettingsReducer(filterSettings: FilterSettings, action: FilterSettingsAction) {
+    switch (action.type) {
+        default:
+            return filterSettings;
+    }
+}
 
-export default FilterSettingsContext;
+export const FilterSettingsContext = createContext<FilterSettings | null>(null);
+export const FilterSettingsDispatchContext = createContext<React.Dispatch<FilterSettingsAction> | null>(null);

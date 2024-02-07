@@ -1,7 +1,12 @@
-import { ReactElement, PropsWithChildren } from 'react';
+import { ReactElement, PropsWithChildren, useReducer } from 'react';
 import Stack from '@mui/material/Container';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import FilterSettingsContext, { FilterSettings } from './FilterSettingsContext';
+import {
+    FilterSettingsContext,
+    FilterSettingsDispatchContext,
+    FilterSettings,
+    filterSettingsReducer
+} from './FilterSettingsContext';
 
 export type FilterMenuSection = PropsWithChildren<{
     children: ReactElement<FilterMenuSectionProps> | ReactElement<FilterMenuSectionProps>[];
@@ -14,7 +19,7 @@ export type FilterMenuSectionProps = PropsWithChildren<{
 
 const FilterMenuSection = ({ filterSectionId, filterSectionTitle, children }: FilterMenuSectionProps) => {
     return (
-        <Accordion key={`filtermenusection-${filterSectionId}`}>
+        <Accordion key={`fms-accordion-${filterSectionId}`}>
             <AccordionSummary>
                 {filterSectionTitle}
             </AccordionSummary>
@@ -25,13 +30,18 @@ const FilterMenuSection = ({ filterSectionId, filterSectionTitle, children }: Fi
     );
 };
 
+const initialFilterSelections = () => {
+    return new FilterSettings();
+}
+
 const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
     const { filterSectionId, filterSectionTitle } = elmt.props;
 
     return (
         <FilterMenuSection
-            filterSectionId={filterSectionId} 
+            filterSectionId={filterSectionId}
             filterSectionTitle={filterSectionTitle}
+            key={`fms-${filterSectionId}`}
         >
             {elmt}
         </FilterMenuSection>
@@ -39,13 +49,15 @@ const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
 };
 
 const FilterMenu = ({ children }: FilterMenuSection) => {
-    const filterSettings = new FilterSettings();
+    const [filterSettings, dispatch] = useReducer(filterSettingsReducer, initialFilterSelections());
     const sections = Array.isArray(children) ? children.map(buildSection) : buildSection(children);
-    
+
     return (
         <Stack>
             <FilterSettingsContext.Provider value={filterSettings}>
-                {sections}
+                <FilterSettingsDispatchContext.Provider value={dispatch}>
+                    {sections}
+                </FilterSettingsDispatchContext.Provider>
             </FilterSettingsContext.Provider>
         </Stack>
     );
