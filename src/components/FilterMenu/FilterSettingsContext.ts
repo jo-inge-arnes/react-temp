@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 
 export type FilterSettingsValue = { valueId: string, value: string };
+
 export type FilterSettings = Map<string, FilterSettingsValue[]>;
 export type FilterSettingsAction = {
     type: FilterSettingsActionType;
