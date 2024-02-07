@@ -3,34 +3,45 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
 import FilterMenu, { FilterMenuSectionProps } from "@/components/FilterMenu";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FilterSettingsContext, FilterSettingsDispatchContext } from "@/components/FilterMenu/FilterSettingsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const MyFilterSection = (props: FilterMenuSectionProps) => {
+  const sectionKey = "test";
+  const [count, setCount] = useState(0);
   const filterSettings = useContext(FilterSettingsContext);
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
   const handleClick = () => {
-    console.log(filterSettings);
+    if (filterSettingsDispatch != null) {
+      setCount(count + 1);
+      let newValues = filterSettings.get(sectionKey) || [];
+      newValues.push(count.toString());
 
-    if (filterSettingsDispatch !== null)
-      filterSettingsDispatch({ type: "addFilter" });
+      filterSettingsDispatch({
+        type: "setFilterSection",
+        sectionSetting: {
+          key: sectionKey,
+          values: newValues
+        }
+      });
+    }
   };
 
   return (
-    <button onClick={() => handleClick()}>klikk mæ</button>
+    <button onClick={() => handleClick()}>Count</button>
   );
 }
 
 export const MyFilterSection2 = (props: FilterMenuSectionProps) => {
+  const sectionKey = "test";
   const filterSettings = useContext(FilterSettingsContext);
-  const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
   return (
     <div>
-      {filterSettings?.toString()}
+      {Array.from(filterSettings.get(sectionKey) ?? []).map((value) => <div key={value}>{value}</div>)}
     </div>
   );
 }

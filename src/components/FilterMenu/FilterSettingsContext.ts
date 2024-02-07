@@ -2,30 +2,19 @@ import { createContext } from 'react';
 
 export type FilterSettingsAction = {
     type: string;
+    sectionSetting: { key: string, values: string[] };
 };
 
-export class FilterSettings {
-    private readonly _selectedFilters: Map<string, string[]>;
-
-    constructor() {
-        this._selectedFilters = new Map<string, string[]>();
-    }
-
-    setFilterSelection(filterName: string, selectedValues: string[]) {
-        this._selectedFilters.set(filterName, selectedValues);
-    }
-
-    get selectedFilters() {
-        return this._selectedFilters;
-    }
-};
+export type FilterSettings = Map<string, string[]>;
 
 export function filterSettingsReducer(filterSettings: FilterSettings, action: FilterSettingsAction) {
     switch (action.type) {
         default:
-            return filterSettings;
+            const newFilterSettings = new Map<string, string[]>(filterSettings.entries());
+            newFilterSettings.set(action.sectionSetting.key, action.sectionSetting.values);
+            return newFilterSettings;
     }
 }
 
-export const FilterSettingsContext = createContext<FilterSettings | null>(null);
+export const FilterSettingsContext = createContext<FilterSettings>(new Map<string, string[]>());
 export const FilterSettingsDispatchContext = createContext<React.Dispatch<FilterSettingsAction> | null>(null);

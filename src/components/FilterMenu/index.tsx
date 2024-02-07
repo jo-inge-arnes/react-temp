@@ -1,4 +1,4 @@
-import { ReactElement, PropsWithChildren, useReducer } from 'react';
+import { ReactElement, PropsWithChildren, useReducer, useState } from 'react';
 import Stack from '@mui/material/Container';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import {
@@ -31,7 +31,7 @@ const FilterMenuSection = ({ filterSectionId, filterSectionTitle, children }: Fi
 };
 
 const initialFilterSelections = () => {
-    return new FilterSettings();
+    return new Map<string, string[]>();
 }
 
 const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
@@ -53,13 +53,13 @@ const FilterMenu = ({ children }: FilterMenuSection) => {
     const sections = Array.isArray(children) ? children.map(buildSection) : buildSection(children);
 
     return (
-        <Stack>
-            <FilterSettingsContext.Provider value={filterSettings}>
-                <FilterSettingsDispatchContext.Provider value={dispatch}>
+        <FilterSettingsContext.Provider value={filterSettings}>
+            <FilterSettingsDispatchContext.Provider value={dispatch}>
+                <Stack>
                     {sections}
-                </FilterSettingsDispatchContext.Provider>
-            </FilterSettingsContext.Provider>
-        </Stack>
+                </Stack>
+            </FilterSettingsDispatchContext.Provider>
+        </FilterSettingsContext.Provider>
     );
 };
 
