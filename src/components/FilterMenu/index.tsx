@@ -1,6 +1,8 @@
 import { ReactElement, PropsWithChildren, useReducer } from 'react';
 import Stack from '@mui/material/Container';
-import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
     FilterSettingsContext,
     FilterSettingsDispatchContext,
@@ -8,29 +10,31 @@ import {
     FilterSettingsValue
 } from './FilterSettingsContext';
 
-export type FilterMenuSectionType = PropsWithChildren<{
+export type FilterMenuProps = PropsWithChildren<{
     children: ReactElement<FilterMenuSectionProps> | ReactElement<FilterMenuSectionProps>[];
 }>;
 
 export type FilterMenuSectionProps = PropsWithChildren<{
-    filterSectionId: string | number;
-    filterSectionTitle: string;
-    filterSettingsKey?: string;
-    accordion?: boolean;
+    sectionid: string;
+    sectiontitle: string;
+    filterkey?: string;
+    accordion?: string;
 }>;
 
-const FilterMenuSection = ({ filterSectionId, filterSectionTitle, accordion, children }: FilterMenuSectionProps) => {
-    if (accordion === false) {
+const FilterMenuSection = ({ sectionid, sectiontitle, accordion, children }: FilterMenuSectionProps) => {
+    if (accordion === "false") {
         return (
-            <Box key={`fms-box-${filterSectionId}`}>
-                {children}
-            </Box>
+            <Card key={`fms-box-${sectionid}`}>
+                <CardContent>
+                    {children}
+                </CardContent>
+            </Card>
         );
     } else {
         return (
-            <Accordion key={`fms-accordion-${filterSectionId}`} >
-                <AccordionSummary>
-                    {filterSectionTitle}
+            <Accordion key={`fms-accordion-${sectionid}`}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    {sectiontitle}
                 </AccordionSummary>
                 <AccordionDetails>
                     {children}
@@ -44,24 +48,25 @@ const initialFilterSelections = () => {
     return new Map<string, FilterSettingsValue[]>();
 }
 
-const buildSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
-    const { filterSectionId, filterSectionTitle, accordion } = elmt.props;
+const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
+    const { sectionid, sectiontitle, accordion } = elmt.props;
 
     return (
         <FilterMenuSection
-            filterSectionId={filterSectionId}
-            filterSectionTitle={filterSectionTitle}
+            sectionid={sectionid}
+            sectiontitle={sectiontitle}
             accordion={accordion}
-            key={`fms-${filterSectionId}`}
+            key={`fms-${sectionid}`}
         >
             {elmt}
         </FilterMenuSection>
     );
 };
 
-const FilterMenu = ({ children }: FilterMenuSectionType) => {
+const FilterMenu = ({ children }: FilterMenuProps) => {
     const [filterSettings, dispatch] = useReducer(filterSettingsReducer, initialFilterSelections());
-    const sections = Array.isArray(children) ? children.map(buildSection) : buildSection(children);
+
+    const sections = Array.isArray(children) ? children.map(buildFilterMenuSection) : buildFilterMenuSection(children);
 
     return (
         <FilterSettingsContext.Provider value={filterSettings}>

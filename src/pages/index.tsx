@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import FilterMenu from "@/components/FilterMenu";
-import FilterMenuHeader from "@/components/FilterMenu/FilterMenuHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +15,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.center}>
-          <FilterMenu>
-            <FilterMenuHeader filterSectionTitle="Filter" filterSectionId="header" accordion={false} />
-          </FilterMenu>
-        </div >
+        <FilterMenu>
+          <div {...{ sectiontitle: "Header", sectionid: "header", accordion: "false" }}>
+            Hei!
+          </div>
+          <div {...{ sectiontitle: "Section 1", sectionid: "section1" }}>
+            Hadet!
+          </div>
+        </FilterMenu>
       </main >
     </>
   );
