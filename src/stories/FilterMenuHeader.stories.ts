@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import FilterMenuHeader from '../components/FilterMenu/FilterMenuHeader';
+import FilterMenuSectionDecorator from '../../.storybook/decorators/FilterMenuSectionDecorator';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -16,6 +17,9 @@ const meta = {
     argTypes: {
       // backgroundColor: { control: 'color' },
     },
+    decorators: [
+      FilterMenuSectionDecorator
+    ],
   } satisfies Meta<typeof FilterMenuHeader>;
   
   export default meta;
