@@ -9,6 +9,7 @@ import {
   FilterSettingsContext, 
   FilterSettingsDispatchContext
 } from "@/components/FilterMenu/FilterSettingsContext";
+import { initialize } from "next/dist/server/lib/render-server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,11 +39,18 @@ export const MyFilterSection = (props: FilterMenuSectionProps) => {
   );
 }
 
+const initialFilterSelections = () => {
+  const initialFilterSelections = new Map<string, FilterSettingsValue[]>();
+  initialFilterSelections.set("test", [{ valueId: "-1", value: "-100" }]);
+  return initialFilterSelections;
+}
+
 export default function Home() {
   const handleSelectionChanged = (newFilterSettings: Map<string, FilterSettingsValue[]>, oldFilterSettings: Map<string, FilterSettingsValue[]>) => {
     console.log("Old filter settings: ", oldFilterSettings);
     console.log("New filter settings: ", newFilterSettings);
   };
+
 
   return (
     <>
@@ -53,7 +61,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <FilterMenu onSelectionChanged={handleSelectionChanged}>
+        <FilterMenu onSelectionChanged={handleSelectionChanged} initialSelections={initialFilterSelections()}>
           <div {...{ sectiontitle: "Header", sectionid: "header", accordion: "false" }}>
             Hei!
           </div>
