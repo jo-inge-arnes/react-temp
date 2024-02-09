@@ -69,7 +69,9 @@ const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
     );
 };
 
-const wrapReducer = (reducer: any, onSelectionChanged: any) => {
+export type FilterMenuReducerType = (state: FilterSettings, action: FilterSettingsAction) => FilterSettings;
+
+const wrapReducer = (reducer: FilterMenuReducerType, onSelectionChanged?: FilterMenuSelectionChangedHandler) => {
     return (filterSettings: FilterSettings, action: FilterSettingsAction) => {
         const oldFilterSettings = filterSettings;
         const newFilterSettings = reducer(filterSettings, action);

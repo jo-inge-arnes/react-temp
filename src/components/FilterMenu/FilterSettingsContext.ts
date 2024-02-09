@@ -12,10 +12,11 @@ export enum FilterSettingsActionType { NOT_SET, SET_SECTION_SELECTIONS };
 
 export function filterSettingsReducer(filterSettings: FilterSettings, action: FilterSettingsAction) {
     switch (action.type) {
-        case FilterSettingsActionType.SET_SECTION_SELECTIONS:
+        case FilterSettingsActionType.SET_SECTION_SELECTIONS: {
             const newFilterSettings = new Map<string, FilterSettingsValue[]>(filterSettings.entries());
             newFilterSettings.set(action.sectionSetting.key, action.sectionSetting.values);
             return newFilterSettings;
+        }
 
         default:
             return filterSettings;
