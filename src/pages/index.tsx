@@ -1,11 +1,49 @@
+import React, { useState, useContext } from "react";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import FilterMenu from "@/components/FilterMenu";
+import FilterMenu, {FilterMenuSectionProps} from "@/components/FilterMenu";
+import { 
+  FilterSettingsValue, 
+  FilterSettingsActionType, 
+  FilterSettingsContext, 
+  FilterSettingsDispatchContext
+} from "@/components/FilterMenu/FilterSettingsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const MyFilterSection = (props: FilterMenuSectionProps) => {
+  const sectionKey = "test";
+  const [count, setCount] = useState(0);
+  const filterSettings = useContext(FilterSettingsContext);
+  const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
+
+  const handleClick = () => {
+    const newCount = count + 1;  
+    setCount(newCount);
+    const curValues = filterSettings.get(sectionKey) || [];
+    const newValues = [...curValues, { valueId: count.toString(), value: count.toString() }];
+
+    filterSettingsDispatch({
+      type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
+      sectionSetting: {
+        key: sectionKey,
+        values: newValues
+      }
+    });
+  };
+
+  return (
+    <button onClick={() => handleClick()}>Count</button>
+  );
+}
+
 export default function Home() {
+  const handleSelectionChanged = (newFilterSettings: Map<string, FilterSettingsValue[]>, oldFilterSettings: Map<string, FilterSettingsValue[]>) => {
+    console.log("Old filter settings: ", oldFilterSettings);
+    console.log("New filter settings: ", newFilterSettings);
+  };
+
   return (
     <>
       <Head>
@@ -15,15 +53,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <FilterMenu>
+        <FilterMenu onSelectionChanged={handleSelectionChanged}>
           <div {...{ sectiontitle: "Header", sectionid: "header", accordion: "false" }}>
             Hei!
           </div>
-          <div {...{ sectiontitle: "Section 1", sectionid: "section1" }}>
-            Hadet!
-          </div>
+          <MyFilterSection sectionid="section1" sectiontitle="Section 1" />
         </FilterMenu>
-      </main >
+      </main>
     </>
   );
 }

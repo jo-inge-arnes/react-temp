@@ -7,10 +7,16 @@ import {
     FilterSettingsContext,
     FilterSettingsDispatchContext,
     filterSettingsReducer,
-    FilterSettingsValue
+    FilterSettingsValue,
+    FilterSettings,
+    FilterSettingsAction
 } from './FilterSettingsContext';
 
+export type FilterMenuSelectionChangedHandler = 
+    (newFilterSettings: Map<string, FilterSettingsValue[]>, oldFilterSettings: Map<string, FilterSettingsValue[]>) => void;
+
 export type FilterMenuProps = PropsWithChildren<{
+    onSelectionChanged?: FilterMenuSelectionChangedHandler;
     children: ReactElement<FilterMenuSectionProps> | ReactElement<FilterMenuSectionProps>[];
 }>;
 
@@ -63,8 +69,19 @@ const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
     );
 };
 
-const FilterMenu = ({ children }: FilterMenuProps) => {
-    const [filterSettings, dispatch] = useReducer(filterSettingsReducer, initialFilterSelections());
+const wrapReducer = (reducer: any, onSelectionChanged: any) => {
+    return (filterSettings: FilterSettings, action: FilterSettingsAction) => {
+        const oldFilterSettings = filterSettings;
+        const newFilterSettings = reducer(filterSettings, action);
+        if (onSelectionChanged) {
+            onSelectionChanged(newFilterSettings, oldFilterSettings);
+        }
+        return newFilterSettings;
+    };
+};
+
+const FilterMenu = ({ onSelectionChanged, children }: FilterMenuProps) => {
+    const [filterSettings, dispatch] = useReducer(wrapReducer(filterSettingsReducer, onSelectionChanged), initialFilterSelections());
 
     const sections = Array.isArray(children) ? children.map(buildFilterMenuSection) : buildFilterMenuSection(children);
 
