@@ -86,7 +86,7 @@ const wrapReducer = (reducer: FilterMenuReducerType, onSelectionChanged?: Filter
     };
 };
 
-const FilterMenu = ({ onSelectionChanged, initialSelections, children }: FilterMenuProps) => {
+export const FilterMenu = ({ onSelectionChanged, initialSelections, children }: FilterMenuProps) => {
     const [filterSettings, dispatch] = useReducer(wrapReducer(filterSettingsReducer, onSelectionChanged), initialFilterSelections(initialSelections));
 
     const sections = Array.isArray(children) ? children.map(buildFilterMenuSection) : buildFilterMenuSection(children);
