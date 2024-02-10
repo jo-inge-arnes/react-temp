@@ -8,7 +8,7 @@ import {
 
 const initialFilterSelections = () => {
     const initialFilterSelections = new Map<string, FilterSettingsValue[]>();
-    initialFilterSelections.set("test", [{ valueId: "-1", value: "-100" }]);
+    initialFilterSelections.set("test", [{ valueLabel: "-1", value: "-100" }]);
     return initialFilterSelections;
   }
 

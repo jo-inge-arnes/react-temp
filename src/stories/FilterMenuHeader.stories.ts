@@ -31,5 +31,6 @@ const meta = {
     args: {
       sectionid: 'Section 1',
       sectiontitle: 'Section Title',
+      filterkey: 'filterkey1',
     },
   };

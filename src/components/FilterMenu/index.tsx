@@ -24,7 +24,7 @@ export type FilterMenuProps = PropsWithChildren<{
 export type FilterMenuSectionProps = PropsWithChildren<{
     sectionid: string;
     sectiontitle: string;
-    filterkey?: string;
+    filterkey: string;
     accordion?: string;
 }>;
 

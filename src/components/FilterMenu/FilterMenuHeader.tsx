@@ -1,4 +1,3 @@
-
 import { useState, useContext } from "react";
 import { FilterMenuSectionProps } from ".";
 import { 
@@ -31,7 +30,7 @@ const FilterMenuHeader = (props: FilterMenuSectionProps) => {
     return (
         <>
             <button onClick={() => handleClick()}>Count</button>
-            { filterSettings.get("test")?.map((v) => <div key={v.valueId}>{v.valueId}: {v.value}</div>) }
+            { filterSettings.get("test")?.map((v) => <div key={v.valueLabel}>{v.valueLabel}: {v.value}</div>) }
         </>
     );
 }
