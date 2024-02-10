@@ -30,7 +30,7 @@ export const RadioGroupFilterSection = (props: RadioGroupFilterSectionProps) => 
     const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
     // Initialize the filter settings if they don't exist
-    if (filterSettings.get(props.filterkey) === undefined) {
+    if (!filterSettings.has(props.filterkey)) {
         const defaultSelection = findByValue(props.defaultValue, props.radios);
         filterSettingsDispatch({
             type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
