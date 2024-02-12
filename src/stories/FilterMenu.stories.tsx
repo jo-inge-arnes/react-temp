@@ -6,7 +6,9 @@ import FilterMenu, {
 
 import RadioGroupFilterSection from "../components/FilterMenu/RadioGroupFilterSection";
 import * as RadioStories from "./RadioGroupFilterSection.stories";
-import { FilterSettingsValue } from "@/components/FilterMenu/FilterSettingsContext";
+
+import SelectedFiltersSection from "../components/FilterMenu/SelectedFiltersSection";
+import * as SelectedFiltersStories from "./SelectedFilterSection.stories";
 
 const meta = {
   title: "Filter Menu Components/FilterMenu",
@@ -25,7 +27,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    children: <RadioGroupFilterSection {...RadioStories.Primary.args} />,
+    children: [
+      <SelectedFiltersSection {...SelectedFiltersStories.Primary.args} accordion="false" key="1"/>,
+      <RadioGroupFilterSection {...RadioStories.Primary.args} key="2" />
+    ],
     onSelectionChanged: (newVals, oldVals) => {
       console.log(newVals);
     },

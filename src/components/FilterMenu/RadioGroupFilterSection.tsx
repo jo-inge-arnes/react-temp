@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { FilterMenuSectionProps } from ".";
 import {
-  FilterSettingsAction,
   FilterSettingsActionType,
   FilterSettingsContext,
   FilterSettingsDispatchContext,
@@ -18,6 +17,14 @@ export type RadioGroupFilterSectionProps = FilterMenuSectionProps & {
   defaultValue: string;
 };
 
+const getSelectedValue = (
+  filterkey: string,
+  filterSettings: Map<string, FilterSettingsValue[]>,
+  defaultValue: string,
+) => {
+  return filterSettings.get(filterkey)?.[0].value || defaultValue;
+};
+
 const findByValue = (
   value: string,
   filterSettingsValues: FilterSettingsValue[],
@@ -25,14 +32,6 @@ const findByValue = (
   return filterSettingsValues.find(
     (filterSettingsValue) => filterSettingsValue.value === value,
   );
-};
-
-const getSelectedValue = (
-  filterkey: string,
-  filterSettings: Map<string, FilterSettingsValue[]>,
-  defaultValue: string,
-) => {
-  return filterSettings.get(filterkey)?.[0].value || defaultValue;
 };
 
 export const RadioGroupFilterSection = (

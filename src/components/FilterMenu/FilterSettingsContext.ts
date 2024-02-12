@@ -1,17 +1,16 @@
 import React, { createContext } from "react";
 
+export enum FilterSettingsActionType {
+  NOT_SET,
+  SET_SECTION_SELECTIONS,
+  DEL_SECTION_SELECTION,
+}
 export type FilterSettingsValue = { valueLabel: string; value: string };
-
 export type FilterSettings = Map<string, FilterSettingsValue[]>;
 export type FilterSettingsAction = {
   type: FilterSettingsActionType;
   sectionSetting: { key: string; values: FilterSettingsValue[] };
 };
-
-export enum FilterSettingsActionType {
-  NOT_SET,
-  SET_SECTION_SELECTIONS,
-}
 
 export function filterSettingsReducer(
   filterSettings: FilterSettings,
@@ -26,6 +25,24 @@ export function filterSettingsReducer(
         action.sectionSetting.key,
         action.sectionSetting.values,
       );
+      return newFilterSettings;
+    }
+
+    case FilterSettingsActionType.DEL_SECTION_SELECTION: {
+      const newFilterSettings = new Map<string, FilterSettingsValue[]>(
+        filterSettings.entries(),
+      );
+      const sectionValues = newFilterSettings.get(action.sectionSetting.key);
+
+      if (sectionValues !== undefined) {
+        newFilterSettings.set(
+          action.sectionSetting.key,
+          sectionValues.filter(
+            (selection) =>
+              selection.value !== action.sectionSetting.values[0].value,
+          ),
+        );
+      }
       return newFilterSettings;
     }
 

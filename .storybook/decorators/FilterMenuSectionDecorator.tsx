@@ -8,7 +8,10 @@ import {
 
 const initialFilterSelections = () => {
   const initialFilterSelections = new Map<string, FilterSettingsValue[]>();
-  initialFilterSelections.set("test", [{ valueLabel: "-1", value: "-100" }]);
+  initialFilterSelections.set("example", [
+    { valueLabel: "Example 1", value: "example-1" },
+    { valueLabel: "Example 2", value: "example-2" },
+  ]);
   return initialFilterSelections;
 };
 
