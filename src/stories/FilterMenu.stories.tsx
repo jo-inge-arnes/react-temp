@@ -23,14 +23,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const handleSelectionChanged = (
-  newFilterSettings: Map<string, FilterSettingsValue[]>,
-  oldFilterSettings: Map<string, FilterSettingsValue[]>,
-) => {
-  console.log("Old filter settings: ", oldFilterSettings);
-  console.log("New filter settings: ", newFilterSettings);
-};
-
 export const Primary: Story = {
   args: {
     children: <RadioGroupFilterSection {...RadioStories.Primary.args} />,
