@@ -35,14 +35,18 @@ export function filterSettingsReducer(
       const sectionValues = newFilterSettings.get(action.sectionSetting.key);
 
       if (sectionValues !== undefined) {
-        newFilterSettings.set(
-          action.sectionSetting.key,
-          sectionValues.filter(
-            (selection) =>
-              selection.value !== action.sectionSetting.values[0].value,
-          ),
+        const newSectionValues = sectionValues.filter(
+          (selection) =>
+            selection.value !== action.sectionSetting.values[0].value,
         );
+
+        if (newSectionValues.length === 0) {
+          newFilterSettings.delete(action.sectionSetting.key);
+        } else {
+          newFilterSettings.set(action.sectionSetting.key, newSectionValues);
+        }
       }
+
       return newFilterSettings;
     }
 

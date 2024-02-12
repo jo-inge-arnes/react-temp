@@ -28,8 +28,12 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: [
-      <SelectedFiltersSection {...SelectedFiltersStories.Primary.args} accordion="false" key="1"/>,
-      <RadioGroupFilterSection {...RadioStories.Primary.args} key="2" />
+      <SelectedFiltersSection
+        {...SelectedFiltersStories.Primary.args}
+        accordion="false"
+        key="1"
+      />,
+      <RadioGroupFilterSection {...RadioStories.Primary.args} key="2" />,
     ],
     onSelectionChanged: (newVals, oldVals) => {
       console.log(newVals);
