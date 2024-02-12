@@ -1,37 +1,34 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import RadioGroupFilterSection from '../components/FilterMenu/RadioGroupFilterSection';
-import FilterMenuSectionDecorator from '../../.storybook/decorators/FilterMenuSectionDecorator';
+import RadioGroupFilterSection from "../components/FilterMenu/RadioGroupFilterSection";
+import FilterMenuSectionDecorator from "../../.storybook/decorators/FilterMenuSectionDecorator";
 
 const meta = {
-    title: 'Example/RadioGroupFilterSection',
-    component: RadioGroupFilterSection,
-    parameters: {
-      layout: 'centered',
-    },
-    tags: ['autodocs'],
-    argTypes: {
-    },
-    decorators: [
-      FilterMenuSectionDecorator
-    ],
-  } satisfies Meta<typeof RadioGroupFilterSection>;
-  
-  export default meta;
+  title: "Example/RadioGroupFilterSection",
+  component: RadioGroupFilterSection,
+  parameters: {
+    layout: "centered",
+  },
+  tags: ["autodocs"],
+  argTypes: {},
+  decorators: [FilterMenuSectionDecorator],
+} satisfies Meta<typeof RadioGroupFilterSection>;
 
-  type Story = StoryObj<typeof meta>;
-  
-  export const Primary: Story = {
-    args: {
-      sectionid: 'indikatorer',
-      sectiontitle: 'Indikatorer',
-      filterkey: 'indikatorer',
-      radios: [
-        { valueLabel: 'Alle indikatorer', value: 'all' },
-        { valueLabel: 'Hjerte- og karsykdommer', value: 'hjerte' },
-        { valueLabel: 'Kreft', value: 'kreft' },
-        { valueLabel: 'Luftveier', value: 'luft' },
-      ],
-      defaultValue: 'all',
-    },
-  };
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    sectionid: "indikatorer",
+    sectiontitle: "Indikatorer",
+    filterkey: "indikatorer",
+    radios: [
+      { valueLabel: "Alle indikatorer", value: "all" },
+      { valueLabel: "Hjerte- og karsykdommer", value: "hjerte" },
+      { valueLabel: "Kreft", value: "kreft" },
+      { valueLabel: "Luftveier", value: "luft" },
+    ],
+    defaultValue: "all",
+  },
+};
