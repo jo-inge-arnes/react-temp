@@ -4,7 +4,7 @@ import RadioGroupFilterSection from "../components/FilterMenu/RadioGroupFilterSe
 import FilterMenuSectionDecorator from "../../.storybook/decorators/FilterMenuSectionDecorator";
 
 const meta = {
-  title: "Example/RadioGroupFilterSection",
+  title: "Filter Menu Components/RadioGroupFilterSection",
   component: RadioGroupFilterSection,
   parameters: {
     layout: "centered",
