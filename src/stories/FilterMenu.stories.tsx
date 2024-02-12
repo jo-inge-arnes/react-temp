@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import FilterMenu, { FilterMenuSelectionChangedHandler } from "../components/FilterMenu";
+import FilterMenu, {
+  FilterMenuSelectionChangedHandler,
+} from "../components/FilterMenu";
 
 import RadioGroupFilterSection from "../components/FilterMenu/RadioGroupFilterSection";
-import * as RadioStories  from "./RadioGroupFilterSection.stories";
+import * as RadioStories from "./RadioGroupFilterSection.stories";
 import { FilterSettingsValue } from "@/components/FilterMenu/FilterSettingsContext";
 
 const meta = {
@@ -13,8 +15,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-  },
+  argTypes: {},
   decorators: [],
 } satisfies Meta<typeof FilterMenu>;
 
@@ -31,8 +32,10 @@ const handleSelectionChanged = (
 };
 
 export const Primary: Story = {
-    args: {
-      children: <RadioGroupFilterSection {...RadioStories.Primary.args} />,
-      onSelectionChanged: (newVals, oldVals) => { console.log(newVals)}
-    }
+  args: {
+    children: <RadioGroupFilterSection {...RadioStories.Primary.args} />,
+    onSelectionChanged: (newVals, oldVals) => {
+      console.log(newVals);
+    },
+  },
 };
