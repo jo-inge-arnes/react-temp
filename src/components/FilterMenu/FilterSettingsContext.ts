@@ -38,7 +38,10 @@ export function filterSettingsReducer(
       if (sectionValues !== undefined) {
         const newSectionValues = sectionValues.filter(
           (selection) =>
-            !(action.sectionSetting.values.some(selectionToRemove => selectionToRemove.value === selection.value))
+            !action.sectionSetting.values.some(
+              (selectionToRemove) =>
+                selectionToRemove.value === selection.value,
+            ),
         );
 
         if (newSectionValues.length === 0) {
