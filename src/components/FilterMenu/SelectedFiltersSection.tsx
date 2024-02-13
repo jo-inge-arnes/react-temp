@@ -10,7 +10,6 @@ import {
 export type SelectedFiltersSectionProps = FilterMenuSectionProps;
 
 export function SelectedFiltersSection(props: SelectedFiltersSectionProps) {
-  const sectionId = props.sectionid;
   const sep = "---";
   const filterSettings = useContext(FilterSettingsContext);
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
