@@ -56,32 +56,23 @@ export const RadioGroupFilterSection = (
   };
 
   const filterKey = props.filterkey;
+  const accordion = props.accordion;
   const filterSettings = useContext(FilterSettingsContext);
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
 
-  // Initialize the filter settings if they don't exist
-  if (!filterSettings.has(filterKey)) {
-    const defaultSelection = findByValue(props.defaultValue, props.radios);
-    filterSettingsDispatch({
-      type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
-      sectionSetting: {
-        key: filterKey,
-        values: defaultSelection ? [defaultSelection] : [],
-      },
-    });
-  }
-
   return (
     <FormControl>
-      <FormLabel id={`filter-section-radio-group-label-${props.sectionid}`}>
-        {props.sectiontitle}
-      </FormLabel>
+      {accordion === "false" && (
+        <FormLabel id={`filter-section-radio-group-label-${props.sectionid}`}>
+          {props.sectiontitle}
+        </FormLabel>
+      )}
       <RadioGroup
         name={`radio-buttons-group-${props.sectionid}`}
         aria-labelledby={`filter-section-radio-group-label-${props.sectionid}`}
         value={getSelectedValue(
           props.filterkey,
-          filterSettings,
+          filterSettings.map,
           props.defaultValue,
         )}
         onChange={handleChange}

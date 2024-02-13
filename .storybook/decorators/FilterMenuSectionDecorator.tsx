@@ -6,19 +6,26 @@ import {
   FilterSettingsValue,
 } from "../../src/components/FilterMenu/FilterSettingsContext";
 
-const initialFilterSelections = () => {
+const initialState = () => {
+  const defaultValue = { valueLabel: "Default Value", value: "default-value" };
   const initialFilterSelections = new Map<string, FilterSettingsValue[]>();
   initialFilterSelections.set("example", [
+    defaultValue,
     { valueLabel: "Example 1", value: "example-1" },
     { valueLabel: "Example 2", value: "example-2" },
   ]);
-  return initialFilterSelections;
+  return {
+    map: initialFilterSelections,
+    defaults: new Map<string, FilterSettingsValue[]>([
+      ["example", [defaultValue]],
+    ]),
+  };
 };
 
 export default function FilterMenuSectionDecorator(Story, context) {
   const [filterSettings, dispatch] = useReducer(
     filterSettingsReducer,
-    initialFilterSelections(),
+    initialState(),
   );
 
   return (

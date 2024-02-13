@@ -20,6 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    accordion: "false",
     sectionid: "indikatorer",
     sectiontitle: "Indikatorer",
     filterkey: "indikatorer",

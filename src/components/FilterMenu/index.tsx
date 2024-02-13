@@ -13,13 +13,14 @@ import {
 } from "./FilterSettingsContext";
 
 export type FilterMenuSelectionChangedHandler = (
-  newFilterSettings: Map<string, FilterSettingsValue[]>,
-  oldFilterSettings: Map<string, FilterSettingsValue[]>,
+  newFilterSettings: { map: Map<string, FilterSettingsValue[]> },
+  oldFilterSettings: { map: Map<string, FilterSettingsValue[]> },
 ) => void;
 
 export type FilterMenuProps = PropsWithChildren<{
   onSelectionChanged?: FilterMenuSelectionChangedHandler;
   initialSelections?: Map<string, FilterSettingsValue[]>;
+  defaultValues?: Map<string, FilterSettingsValue[]>;
   children:
     | ReactElement<FilterMenuSectionProps>
     | ReactElement<FilterMenuSectionProps>[];
@@ -56,14 +57,29 @@ const FilterMenuSection = ({
   }
 };
 
-const initialFilterSelections = (
+const initialState = (
   initialFilterSelections?: Map<string, FilterSettingsValue[]>,
+  defaultValues?: Map<string, FilterSettingsValue[]>,
 ) => {
+  let filterSettingsMap: Map<string, FilterSettingsValue[]>;
   if (initialFilterSelections)
-    return new Map<string, FilterSettingsValue[]>(
+    filterSettingsMap = new Map<string, FilterSettingsValue[]>(
       initialFilterSelections.entries(),
     );
-  else return new Map<string, FilterSettingsValue[]>();
+  else filterSettingsMap = new Map<string, FilterSettingsValue[]>();
+
+  let defaultValuesMap;
+  if (defaultValues)
+    defaultValuesMap = new Map<string, FilterSettingsValue[]>(
+      defaultValues.entries(),
+    );
+  else defaultValuesMap = new Map<string, FilterSettingsValue[]>();
+
+  defaultValuesMap.forEach((value, key) => {
+    if (!filterSettingsMap.has(key)) filterSettingsMap.set(key, value);
+  });
+
+  return { map: filterSettingsMap, defaults: defaultValuesMap };
 };
 
 const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
@@ -104,16 +120,19 @@ const wrapReducer = (
 export const FilterMenu = ({
   onSelectionChanged,
   initialSelections,
+  defaultValues,
   children,
 }: FilterMenuProps) => {
-  const [filterSettings, dispatch] = useReducer(
-    wrapReducer(filterSettingsReducer, onSelectionChanged),
-    initialFilterSelections(initialSelections),
-  );
-
   const sections = Array.isArray(children)
     ? children.map(buildFilterMenuSection)
     : buildFilterMenuSection(children);
+
+  // TODO: Must add initial sections and default values from the children, if not already
+  // defined in the initialSelections and defaultValues
+  const [filterSettings, dispatch] = useReducer(
+    wrapReducer(filterSettingsReducer, onSelectionChanged),
+    initialState(initialSelections, defaultValues),
+  );
 
   return (
     <FilterSettingsContext.Provider value={filterSettings}>
