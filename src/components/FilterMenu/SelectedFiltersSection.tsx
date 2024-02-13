@@ -21,7 +21,7 @@ export function SelectedFiltersSection(props: SelectedFiltersSectionProps) {
     const filterLabel = idParts[2];
 
     filterSettingsDispatch({
-      type: FilterSettingsActionType.DEL_SECTION_SELECTION,
+      type: FilterSettingsActionType.DEL_SECTION_SELECTIONS,
       sectionSetting: {
         key: filterKey,
         values: [{ value: filterValue, valueLabel: filterLabel }],

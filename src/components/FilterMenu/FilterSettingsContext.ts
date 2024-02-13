@@ -3,7 +3,7 @@ import React, { createContext } from "react";
 export enum FilterSettingsActionType {
   NOT_SET,
   SET_SECTION_SELECTIONS,
-  DEL_SECTION_SELECTION,
+  DEL_SECTION_SELECTIONS,
 }
 export type FilterSettingsValue = { valueLabel: string; value: string };
 export type FilterSettings = Map<string, FilterSettingsValue[]>;
@@ -28,7 +28,8 @@ export function filterSettingsReducer(
       return newFilterSettings;
     }
 
-    case FilterSettingsActionType.DEL_SECTION_SELECTION: {
+    // Remove selections from give section. Not that only the value is used to identify the selection.
+    case FilterSettingsActionType.DEL_SECTION_SELECTIONS: {
       const newFilterSettings = new Map<string, FilterSettingsValue[]>(
         filterSettings.entries(),
       );
@@ -37,7 +38,7 @@ export function filterSettingsReducer(
       if (sectionValues !== undefined) {
         const newSectionValues = sectionValues.filter(
           (selection) =>
-            selection.value !== action.sectionSetting.values[0].value,
+            !(action.sectionSetting.values.some(selectionToRemove => selectionToRemove.value === selection.value))
         );
 
         if (newSectionValues.length === 0) {
