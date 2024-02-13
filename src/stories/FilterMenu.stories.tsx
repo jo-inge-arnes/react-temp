@@ -34,7 +34,7 @@ const yearsArgs = {
     { valueLabel: "2022", value: "2022" },
     { valueLabel: "2021", value: "2021" },
   ],
-  defaultValue: "2023",
+  defaultValues: [{ valueLabel: "2023", value: "2023" }],
 };
 
 export const Primary: Story = {
@@ -45,7 +45,11 @@ export const Primary: Story = {
         accordion="false"
         key="1"
       />,
-      <RadioGroupFilterSection {...RadioStories.Primary.args} key="2" />,
+      <RadioGroupFilterSection
+        {...RadioStories.Primary.args}
+        accordion="true"
+        key="2"
+      />,
       <RadioGroupFilterSection {...yearsArgs} key="3" />,
     ],
     onSelectionChanged: (newVals, oldVals) => {

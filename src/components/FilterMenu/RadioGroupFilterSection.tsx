@@ -14,23 +14,22 @@ import Radio from "@mui/material/Radio";
 
 export type RadioGroupFilterSectionProps = FilterMenuSectionProps & {
   radios: FilterSettingsValue[];
-  defaultValue: string;
+};
+
+const getDefaultValue = (defaultValues?: FilterSettingsValue[]) => {
+  if (defaultValues == null || defaultValues.length === 0) {
+    return undefined;
+  }
+  return defaultValues[0].value;
 };
 
 const getSelectedValue = (
   filterkey: string,
   filterSettings: Map<string, FilterSettingsValue[]>,
-  defaultValue: string,
+  defaultValues?: FilterSettingsValue[],
 ) => {
-  return filterSettings.get(filterkey)?.[0].value || defaultValue;
-};
-
-const findByValue = (
-  value: string,
-  filterSettingsValues: FilterSettingsValue[],
-) => {
-  return filterSettingsValues.find(
-    (filterSettingsValue) => filterSettingsValue.value === value,
+  return (
+    filterSettings.get(filterkey)?.[0].value || getDefaultValue(defaultValues)
   );
 };
 
@@ -73,7 +72,7 @@ export const RadioGroupFilterSection = (
         value={getSelectedValue(
           props.filterkey,
           filterSettings.map,
-          props.defaultValue,
+          props.defaultValues,
         )}
         onChange={handleChange}
       >

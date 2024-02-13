@@ -30,6 +30,6 @@ export const Primary: Story = {
       { valueLabel: "Kreft", value: "kreft" },
       { valueLabel: "Luftveier", value: "luft" },
     ],
-    defaultValue: "all",
+    defaultValues: [{ valueLabel: "Alle indikatorer", value: "all" }],
   },
 };

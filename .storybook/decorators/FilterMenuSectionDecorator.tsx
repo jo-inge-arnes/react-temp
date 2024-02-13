@@ -1,15 +1,12 @@
-import React, { useReducer } from "react";
-import {
-  FilterSettingsContext,
-  FilterSettingsDispatchContext,
-  filterSettingsReducer,
-  FilterSettingsValue,
-} from "../../src/components/FilterMenu/FilterSettingsContext";
+import React from "react";
+import FilterMenu from "../../src/components/FilterMenu";
+import { FilterSettingsValue } from "../../src/components/FilterMenu/FilterSettingsContext";
 
 const initialState = () => {
+  const filterkey = "example";
   const defaultValue = { valueLabel: "Default Value", value: "default-value" };
   const initialFilterSelections = new Map<string, FilterSettingsValue[]>();
-  initialFilterSelections.set("example", [
+  initialFilterSelections.set(filterkey, [
     defaultValue,
     { valueLabel: "Example 1", value: "example-1" },
     { valueLabel: "Example 2", value: "example-2" },
@@ -17,22 +14,16 @@ const initialState = () => {
   return {
     map: initialFilterSelections,
     defaults: new Map<string, FilterSettingsValue[]>([
-      ["example", [defaultValue]],
+      [filterkey, [defaultValue]],
     ]),
   };
 };
 
 export default function FilterMenuSectionDecorator(Story, context) {
-  const [filterSettings, dispatch] = useReducer(
-    filterSettingsReducer,
-    initialState(),
-  );
-
+  const { map, defaults } = initialState();
   return (
-    <FilterSettingsContext.Provider value={filterSettings}>
-      <FilterSettingsDispatchContext.Provider value={dispatch}>
-        <Story />
-      </FilterSettingsDispatchContext.Provider>
-    </FilterSettingsContext.Provider>
+    <FilterMenu initialSelections={map} defaultValues={defaults}>
+      <Story />
+    </FilterMenu>
   );
 }

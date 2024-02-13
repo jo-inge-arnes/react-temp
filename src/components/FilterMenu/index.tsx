@@ -31,6 +31,7 @@ export type FilterMenuSectionProps = PropsWithChildren<{
   sectiontitle: string;
   filterkey: string;
   accordion?: string;
+  defaultValues?: FilterSettingsValue[];
 }>;
 
 const FilterMenuSection = ({
@@ -60,6 +61,7 @@ const FilterMenuSection = ({
 const initialState = (
   initialFilterSelections?: Map<string, FilterSettingsValue[]>,
   defaultValues?: Map<string, FilterSettingsValue[]>,
+  sections?: ReactElement<FilterMenuSectionProps>[],
 ) => {
   let filterSettingsMap: Map<string, FilterSettingsValue[]>;
   if (initialFilterSelections)
@@ -68,34 +70,27 @@ const initialState = (
     );
   else filterSettingsMap = new Map<string, FilterSettingsValue[]>();
 
-  let defaultValuesMap;
+  let defaultValuesMap: Map<string, FilterSettingsValue[]>;
   if (defaultValues)
     defaultValuesMap = new Map<string, FilterSettingsValue[]>(
       defaultValues.entries(),
     );
   else defaultValuesMap = new Map<string, FilterSettingsValue[]>();
 
+  sections?.forEach((section) => {
+    const sectionFilterKey = section.props.filterkey;
+    const sectionDefaults = section.props.defaultValues;
+    if (sectionFilterKey && sectionDefaults && sectionDefaults.length > 0) {
+      if (!defaultValuesMap.has(sectionFilterKey))
+        defaultValuesMap.set(sectionFilterKey, sectionDefaults);
+    }
+  });
+
   defaultValuesMap.forEach((value, key) => {
     if (!filterSettingsMap.has(key)) filterSettingsMap.set(key, value);
   });
 
   return { map: filterSettingsMap, defaults: defaultValuesMap };
-};
-
-const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
-  const { filterkey, sectionid, sectiontitle, accordion } = elmt.props;
-
-  return (
-    <FilterMenuSection
-      filterkey={filterkey}
-      sectionid={sectionid}
-      sectiontitle={sectiontitle}
-      accordion={accordion}
-      key={`fms-${sectionid}`}
-    >
-      {elmt}
-    </FilterMenuSection>
-  );
 };
 
 export type FilterMenuReducerType = (
@@ -117,6 +112,24 @@ const wrapReducer = (
   };
 };
 
+const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
+  const { filterkey, sectionid, sectiontitle, accordion, defaultValues } =
+    elmt.props;
+
+  return (
+    <FilterMenuSection
+      filterkey={filterkey}
+      sectionid={sectionid}
+      sectiontitle={sectiontitle}
+      accordion={accordion}
+      key={`fms-${sectionid}`}
+      defaultValues={defaultValues}
+    >
+      {elmt}
+    </FilterMenuSection>
+  );
+};
+
 export const FilterMenu = ({
   onSelectionChanged,
   initialSelections,
@@ -125,13 +138,13 @@ export const FilterMenu = ({
 }: FilterMenuProps) => {
   const sections = Array.isArray(children)
     ? children.map(buildFilterMenuSection)
-    : buildFilterMenuSection(children);
+    : [buildFilterMenuSection(children)];
 
   // TODO: Must add initial sections and default values from the children, if not already
   // defined in the initialSelections and defaultValues
   const [filterSettings, dispatch] = useReducer(
     wrapReducer(filterSettingsReducer, onSelectionChanged),
-    initialState(initialSelections, defaultValues),
+    initialState(initialSelections, defaultValues, sections),
   );
 
   return (
