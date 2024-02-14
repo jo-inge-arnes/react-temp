@@ -24,7 +24,9 @@ const createSettingsAndDefaults = () => {
 const onSelectionChanged: FilterMenuSelectionChangedHandler = (
   newVals,
   oldVals,
+  action,
 ) => {
+  console.log(action);
   console.log(newVals);
 };
 

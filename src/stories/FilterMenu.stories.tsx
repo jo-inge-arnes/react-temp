@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import FilterMenu, {
-  FilterMenuSelectionChangedHandler,
-} from "../components/FilterMenu";
+import FilterMenu from "../components/FilterMenu";
 
 import RadioGroupFilterSection from "../components/FilterMenu/RadioGroupFilterSection";
 import * as RadioStories from "./RadioGroupFilterSection.stories";
@@ -52,7 +50,8 @@ export const Primary: Story = {
       />,
       <RadioGroupFilterSection {...yearsArgs} key="3" />,
     ],
-    onSelectionChanged: (newVals, oldVals) => {
+    onSelectionChanged: (newVals, oldVals, action) => {
+      console.log(action);
       console.log(newVals);
     },
   },
