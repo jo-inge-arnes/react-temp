@@ -58,7 +58,7 @@ const FilterMenuSection = ({
   }
 };
 
-const initialState = (
+export const initialState = (
   initialFilterSelections?: Map<string, FilterSettingsValue[]>,
   defaultValues?: Map<string, FilterSettingsValue[]>,
   sections?: ReactElement<FilterMenuSectionProps>[],
@@ -98,7 +98,7 @@ export type FilterMenuReducerType = (
   action: FilterSettingsAction,
 ) => FilterSettings;
 
-const wrapReducer = (
+export const wrapReducer = (
   reducer: FilterMenuReducerType,
   onSelectionChanged?: FilterMenuSelectionChangedHandler,
 ) => {
@@ -140,8 +140,6 @@ export const FilterMenu = ({
     ? children.map(buildFilterMenuSection)
     : [buildFilterMenuSection(children)];
 
-  // TODO: Must add initial sections and default values from the children, if not already
-  // defined in the initialSelections and defaultValues
   const [filterSettings, dispatch] = useReducer(
     wrapReducer(filterSettingsReducer, onSelectionChanged),
     initialState(initialSelections, defaultValues, sections),

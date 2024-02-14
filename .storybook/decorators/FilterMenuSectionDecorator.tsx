@@ -1,8 +1,10 @@
 import React from "react";
-import FilterMenu from "../../src/components/FilterMenu";
+import FilterMenu, {
+  FilterMenuSelectionChangedHandler,
+} from "../../src/components/FilterMenu";
 import { FilterSettingsValue } from "../../src/components/FilterMenu/FilterSettingsContext";
 
-const initialState = () => {
+const createSettingsAndDefaults = () => {
   const filterkey = "example";
   const defaultValue = { valueLabel: "Default Value", value: "default-value" };
   const initialFilterSelections = new Map<string, FilterSettingsValue[]>();
@@ -19,11 +21,23 @@ const initialState = () => {
   };
 };
 
+const onSelectionChanged: FilterMenuSelectionChangedHandler = (
+  newVals,
+  oldVals,
+) => {
+  console.log(newVals);
+};
+
 export default function FilterMenuSectionDecorator(Story, context) {
-  const { map, defaults } = initialState();
+  const { map, defaults } = createSettingsAndDefaults();
+
   return (
-    <FilterMenu initialSelections={map} defaultValues={defaults}>
-      <Story />
+    <FilterMenu
+      onSelectionChanged={onSelectionChanged}
+      initialSelections={map}
+      defaultValues={defaults}
+    >
+      {Story()}
     </FilterMenu>
   );
 }

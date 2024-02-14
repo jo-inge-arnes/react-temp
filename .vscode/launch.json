@@ -22,6 +22,14 @@
       "cwd": "${workspaceFolder}/src/",
       "sourceMaps": true,
       "trace": true
-    }
+    },
+    {
+      "name": "Debug storybook client-side",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:6006",
+      "sourceMaps": true,
+      "trace": true
+    },    
   ]
 }
