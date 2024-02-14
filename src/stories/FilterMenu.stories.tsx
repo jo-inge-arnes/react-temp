@@ -34,7 +34,7 @@ const yearsArgs = {
     { valueLabel: "2022", value: "2022" },
     { valueLabel: "2021", value: "2021" },
   ],
-  defaultValues: [{ valueLabel: "2023", value: "2023" }],
+  defaultvalues: [{ valueLabel: "2023", value: "2023" }],
 };
 
 export const Primary: Story = {

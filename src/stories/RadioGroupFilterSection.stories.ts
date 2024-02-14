@@ -24,7 +24,7 @@ export const Primary: Story = {
     sectionid: "indikatorer",
     sectiontitle: "Indikatorer",
     filterkey: "indikatorer",
-    defaultValues: [{ valueLabel: "Alle indikatorer", value: "all" }],
+    defaultvalues: [{ valueLabel: "Alle indikatorer", value: "all" }],
     radios: [
       { valueLabel: "Alle indikatorer", value: "all" },
       { valueLabel: "Hjerte- og karsykdommer", value: "hjerte" },

@@ -30,6 +30,6 @@
       "url": "http://localhost:6006",
       "sourceMaps": true,
       "trace": true
-    },    
+    }
   ]
 }

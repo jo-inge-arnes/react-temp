@@ -26,12 +26,13 @@ export type FilterMenuProps = PropsWithChildren<{
     | ReactElement<FilterMenuSectionProps>[];
 }>;
 
+// The properties are all small caps for use as attribtues directly in JSX elements
 export type FilterMenuSectionProps = PropsWithChildren<{
   sectionid: string;
   sectiontitle: string;
   filterkey: string;
   accordion?: string;
-  defaultValues?: FilterSettingsValue[];
+  defaultvalues?: FilterSettingsValue[];
 }>;
 
 const FilterMenuSection = ({
@@ -79,7 +80,7 @@ export const initialState = (
 
   sections?.forEach((section) => {
     const sectionFilterKey = section.props.filterkey;
-    const sectionDefaults = section.props.defaultValues;
+    const sectionDefaults = section.props.defaultvalues;
     if (sectionFilterKey && sectionDefaults && sectionDefaults.length > 0) {
       if (!defaultValuesMap.has(sectionFilterKey))
         defaultValuesMap.set(sectionFilterKey, sectionDefaults);
@@ -113,7 +114,7 @@ export const wrapReducer = (
 };
 
 const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
-  const { filterkey, sectionid, sectiontitle, accordion, defaultValues } =
+  const { filterkey, sectionid, sectiontitle, accordion, defaultvalues } =
     elmt.props;
 
   return (
@@ -123,7 +124,7 @@ const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
       sectiontitle={sectiontitle}
       accordion={accordion}
       key={`fms-${sectionid}`}
-      defaultValues={defaultValues}
+      defaultvalues={defaultvalues}
     >
       {elmt}
     </FilterMenuSection>

@@ -28,7 +28,7 @@ const onSelectionChanged: FilterMenuSelectionChangedHandler = (
   console.log(newVals);
 };
 
-export default function FilterMenuSectionDecorator(Story, context) {
+export default function FilterMenuSectionDecorator(Story: any, context: any) {
   const { map, defaults } = createSettingsAndDefaults();
 
   return (
