@@ -6,7 +6,6 @@ const filterSettingsDispatch = vi.fn();
 
 test("handleDelete calls filterSettingsDispatch with correct params", () => {
   handleDelete("key---value", filterSettingsDispatch);
-  console.log("Hello");
   expect(filterSettingsDispatch).toHaveBeenCalledWith({
     type: FilterSettingsActionType.DEL_SECTION_SELECTIONS,
     sectionSetting: {
