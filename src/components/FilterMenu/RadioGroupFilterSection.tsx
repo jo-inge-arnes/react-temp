@@ -28,6 +28,7 @@ const getSelectedValue = (
   filterSettings: Map<string, FilterSettingsValue[]>,
   defaultValues?: FilterSettingsValue[],
 ) => {
+  console.log("Hello");
   return (
     filterSettings.get(filterkey)?.[0].value || getDefaultValue(defaultValues)
   );
