@@ -110,11 +110,22 @@ export const initialState = (
   return { map: filterSettingsMap, defaults: defaultValuesMap };
 };
 
+/**
+ * Function signature for the reducer used by the FilterMenu to update state,
+ * which is made available to the child components.
+ */
 export type FilterMenuReducerType = (
   state: FilterSettings,
   action: FilterSettingsAction,
 ) => FilterSettings;
 
+/**
+ * Used to wrap a reducer function with a onSelectionChanged-callback that is called when the state has been updated.
+ *
+ * @param reducer A reducer function that takes the current state and an action and returns an updated state
+ * @param onSelectionChanged A callback function that is called when the selection changes
+ * @returns A reducer function that wraps the given reducer and calls the onSelectionChanged callback
+ */
 export const wrapReducer = (
   reducer: FilterMenuReducerType,
   onSelectionChanged?: FilterMenuSelectionChangedHandler,
@@ -147,6 +158,11 @@ const buildFilterMenuSection = (elmt: ReactElement<FilterMenuSectionProps>) => {
   );
 };
 
+/**
+ * The main component of the FilterMenu package. It wraps the filter settings in
+ * a context and provides a dispatch function to child components to update the
+ * filter settings.
+ */
 export const FilterMenu = ({
   onSelectionChanged,
   initialSelections,
