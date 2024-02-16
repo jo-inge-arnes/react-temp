@@ -15,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        Run <i>yarn storybook</i> to see the components in action.
+        <div>Run <code>yarn storybook</code> to see the components in action.</div>
       </main>
     </>
   );
