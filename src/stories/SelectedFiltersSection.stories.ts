@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import SelectedFilterSection from "../components/FilterMenu/SelectedFiltersSection";
+import SelectedFiltersSection from "../components/FilterMenu/SelectedFiltersSection";
 import FilterMenuSectionDecorator from "../../.storybook/decorators/FilterMenuSectionDecorator";
 
 const meta = {
   title: "Filter Menu Components/SelectedFilterSection",
-  component: SelectedFilterSection,
+  component: SelectedFiltersSection,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {},
   decorators: [FilterMenuSectionDecorator],
-} satisfies Meta<typeof SelectedFilterSection>;
+} satisfies Meta<typeof SelectedFiltersSection>;
 
 export default meta;
 

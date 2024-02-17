@@ -6,7 +6,7 @@ import RadioGroupFilterSection from "../components/FilterMenu/RadioGroupFilterSe
 import * as RadioStories from "./RadioGroupFilterSection.stories";
 
 import SelectedFiltersSection from "../components/FilterMenu/SelectedFiltersSection";
-import * as SelectedFiltersStories from "./SelectedFilterSection.stories";
+import * as SelectedFiltersStories from "./SelectedFiltersSection.stories";
 
 const meta = {
   title: "Filter Menu Components/FilterMenu",
