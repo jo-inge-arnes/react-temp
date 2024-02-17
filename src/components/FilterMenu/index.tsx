@@ -84,6 +84,28 @@ const FilterMenuSection = ({
 };
 
 /**
+ * Used by initialState to merge default values from sections into the overall default values map.
+ *
+ * @param sections Child elements that can have initial and default values
+ * @param defaultValuesMap Default key-value pairs of filter settings
+ * @returns The updated default values map
+ */
+const mergeWithSectionDefaults = (
+  sections: ReactElement<FilterMenuSectionProps>[],
+  defaultValuesMap: Map<string, FilterSettingsValue[]>,
+) => {
+  sections.forEach((section) => {
+    const sectionFilterKey = section.props.filterkey;
+    const sectionDefaults = section.props.defaultvalues;
+    if (sectionFilterKey && sectionDefaults && sectionDefaults.length > 0) {
+      defaultValuesMap.set(sectionFilterKey, sectionDefaults);
+    }
+  });
+
+  return defaultValuesMap;
+};
+
+/**
  * Function used by FilterMenu to merge initial and default filter settings.
  *
  * FilterMenu accepts both initial settings and default (fallback) settings that
@@ -115,16 +137,8 @@ export const initialState = (
     );
   else defaultValuesMap = new Map<string, FilterSettingsValue[]>();
 
-  // Add default values from sections to the overall defaults. Section default
-  // values will overwrite top level default values.
-  //
-  sections?.forEach((section) => {
-    const sectionFilterKey = section.props.filterkey;
-    const sectionDefaults = section.props.defaultvalues;
-    if (sectionFilterKey && sectionDefaults && sectionDefaults.length > 0) {
-      defaultValuesMap.set(sectionFilterKey, sectionDefaults);
-    }
-  });
+  if (sections)
+    defaultValuesMap = mergeWithSectionDefaults(sections, defaultValuesMap);
 
   defaultValuesMap.forEach((value, key) => {
     if (!filterSettingsMap.has(key)) filterSettingsMap.set(key, value);
