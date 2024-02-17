@@ -16,7 +16,7 @@ import { filterSettingsReducer } from "./FilterSettingsReducer";
 import { FilterSettingsAction } from "./FilterSettingsReducer";
 
 /**
- * The type/signalture of the handler to call when the selection changes. It is called with the new
+ * The type/signature of the handler function to call when the selection changes. It is called with the new
  * filter settings, the old filter settings, and the action that caused the change.
  */
 export type FilterMenuSelectionChangedHandler = (
