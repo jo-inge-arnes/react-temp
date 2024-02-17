@@ -46,7 +46,8 @@ export function SelectedFiltersSection(props: SelectedFiltersSectionProps) {
     <Stack
       direction="row"
       spacing={1}
-      id={`selected-filter-section-id-${props.sectionid}`}
+      id={`selected-filters-section-id-${props.sectionid}`}
+      data-testid={`selected-filters-section-id-${props.sectionid}`}
     >
       {Array.from(filterSettings.map.keys()).map((key) => {
         return filterSettings.map.get(key)?.map((filterSetting) => {
@@ -54,6 +55,7 @@ export function SelectedFiltersSection(props: SelectedFiltersSectionProps) {
           return (
             <Chip
               key={chipId}
+              data-testid={chipId}
               label={filterSetting.valueLabel}
               onDelete={() => handleDelete(chipId, filterSettingsDispatch)}
             />
