@@ -8,6 +8,12 @@ import { FilterSettingsActionType } from "./FilterSettingsReducer";
 
 export type SelectedFiltersSectionProps = FilterMenuSectionProps;
 
+/**
+ * Utility function to handle the delete event for a chip
+ *
+ * @param chipId Element id for the chip to delete
+ * @param filterSettingsDispatch The dispatch function for updating the filter settings
+ */
 export const handleDelete = (
   chipId: string,
   filterSettingsDispatch: React.Dispatch<FilterSettingsAction>,
@@ -27,6 +33,10 @@ export const handleDelete = (
   });
 };
 
+/**
+ * A component for displaying currently selected filter settings as a collection of chips.
+ * The chips can be deleted individually to remove filter settings.
+ */
 export function SelectedFiltersSection(props: SelectedFiltersSectionProps) {
   const sep = "---";
   const filterSettings = useContext(FilterSettingsContext);
