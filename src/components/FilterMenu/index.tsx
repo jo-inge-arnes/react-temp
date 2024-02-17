@@ -118,7 +118,7 @@ const mergeWithSectionDefaults = (
  * @param sections Child elements that can have initial and default values
  * @returns A FilterSettings instance with the merged initial and default values
  */
-export const initialState = (
+export const createInitialFilterSettings = (
   initialFilterSelections?: Map<string, FilterSettingsValue[]>,
   defaultValues?: Map<string, FilterSettingsValue[]>,
   sections?: ReactElement<FilterMenuSectionProps>[],
@@ -209,7 +209,7 @@ export const FilterMenu = ({
 
   const [filterSettings, dispatch] = useReducer(
     wrapReducer(filterSettingsReducer, onSelectionChanged),
-    initialState(initialSelections, defaultValues, sections),
+    createInitialFilterSettings(initialSelections, defaultValues, sections),
   );
 
   return (
