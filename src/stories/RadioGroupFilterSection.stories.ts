@@ -33,3 +33,19 @@ export const Primary: Story = {
     ],
   },
 };
+
+export const InitialSelectionWithoutDefault: Story = {
+  args: {
+    accordion: "false",
+    sectionid: "indikatorer",
+    sectiontitle: "Indikatorer",
+    filterkey: "indikatorer",
+    initialselections: [{ valueLabel: "Alle indikatorer", value: "all" }],
+    radios: [
+      { valueLabel: "Alle indikatorer", value: "all" },
+      { valueLabel: "Hjerte- og karsykdommer", value: "hjerte" },
+      { valueLabel: "Kreft", value: "kreft" },
+      { valueLabel: "Luftveier", value: "luft" },
+    ],
+  },
+};
