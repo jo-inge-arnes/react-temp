@@ -48,6 +48,33 @@ export const buildTreeView = (props: TreeViewSectionProps) => {
   return <>{buildTreeLevel(props.treeData, props.filterkey, "")}</>;
 };
 
+/**
+ * Function used to retrieve the FilterSettingsValue for a node in the tree
+ *
+ * @param nodeId The hyphen-separated indices of the node's position in the tree
+ * @param treeData The tree data
+ * @returns The FilterSettingsValue for the node with the given nodeId
+ */
+export const findFilterSettingValue = (
+  nodeId: string,
+  treeData: TreeViewFilterSectionNode[],
+) => {
+  const nodeIndices = nodeId.split("-");
+
+  let currentNode: TreeViewFilterSectionNode = treeData[Number(nodeIndices[0])];
+
+  for (let i = 1; i < nodeIndices.length; i++) {
+    if (!currentNode.children) {
+      throw new Error(
+        "The index is invalid because the node does not have children.",
+      );
+    }
+    currentNode = currentNode.children[Number(nodeIndices[i])];
+  }
+
+  return currentNode.nodeValue;
+};
+
 export const handleSelect = (
   filterKey: string,
   nodeIds: string[] | string,
