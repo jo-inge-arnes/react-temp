@@ -14,16 +14,34 @@ import { FilterSettingsDispatchContext } from "./FilterSettingsReducer";
 import { FilterSettingsAction } from "./FilterSettingsReducer";
 import { FilterSettingsActionType } from "./FilterSettingsReducer";
 
+/**
+ * The structure of a node in the tree data used with the TreeViewFilterSection component
+ */
 type TreeViewFilterSectionNode = {
   nodeValue: FilterSettingsValue;
   children?: TreeViewFilterSectionNode[];
 };
 
+/**
+ * Props for the TreeViewFilterSection component, which extends the FilterMenuSectionProps
+ * used with the FilterMenu component. Accepts the treeData prop, which is an array of
+ * TreeViewFilterSectionNode objects that represent the tree structure of the filter options.
+ * Also accepts the multiselect prop, which is a boolean that determines whether the filter
+ * is single or multi-select.
+ */
 type TreeViewSectionProps = FilterMenuSectionProps & {
   multiselect?: boolean;
   treeData: TreeViewFilterSectionNode[];
 };
 
+/**
+ * Recursive function that builds the TreeView from the tree data one level at a time
+ *
+ * @param treeData The tree data with the TreeViewFilterSectionNode structure
+ * @param filterKey The filter key for the section
+ * @param prefix The hyphen-separated indices of the parent node's position in the tree
+ * @returns A tree view item for the corrent node and its children
+ */
 const buildTreeLevel = (
   treeData: TreeViewFilterSectionNode[],
   filterKey: string,
@@ -44,6 +62,12 @@ const buildTreeLevel = (
   });
 };
 
+/**
+ * Function that builds the TreeView from the tree data
+ *
+ * @param props
+ * @returns The TreeItem components for the TreeView
+ */
 export const buildTreeView = (props: TreeViewSectionProps) => {
   return <>{buildTreeLevel(props.treeData, props.filterkey, "")}</>;
 };
@@ -75,21 +99,41 @@ export const findFilterSettingValue = (
   return currentNode.nodeValue;
 };
 
+/**
+ * Function used for updating the FilterMenu state when the user selects nodes in the TreeView
+ *
+ * @param filterKey The filter key for the section
+ * @param nodeIds The nodeId or nodeIds of the selected nodes
+ * @param treeData The tree data with the TreeViewFilterSectionNode structure
+ * @param filterSettingsDispatch The dispatch function for the filter settings reducer that manages changes to the filter settings state
+ */
 export const handleSelect = (
   filterKey: string,
   nodeIds: string[] | string,
   treeData: TreeViewFilterSectionNode[],
   filterSettingsDispatch: React.Dispatch<FilterSettingsAction>,
 ) => {
+  const selectedNodeIds = Array.isArray(nodeIds) ? nodeIds : [nodeIds];
+  const selectedFilterSettingValues = selectedNodeIds.map((nodeId) =>
+    findFilterSettingValue(nodeId, treeData),
+  );
+
   filterSettingsDispatch({
     type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
     sectionSetting: {
       key: filterKey,
-      values: [],
+      values: selectedFilterSettingValues,
     },
   });
 };
 
+/**
+ * Component for use with the FilterMenu component, which uses a TreeView to display filter options.
+ * The component can be used for either single or multi-select filters.
+ *
+ * @param props The props for the TreeViewFilterSection
+ * @returns The TreeViewFilterSection component
+ */
 export default function TreeViewFilterSection(props: TreeViewSectionProps) {
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
   const multiSelect = props.multiselect ?? true;
