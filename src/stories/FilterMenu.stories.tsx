@@ -8,6 +8,9 @@ import * as RadioStories from "./RadioGroupFilterSection.stories";
 import SelectedFiltersSection from "../components/FilterMenu/SelectedFiltersSection";
 import * as SelectedFiltersStories from "./SelectedFiltersSection.stories";
 
+import TreeViewFilterSection from "../components/FilterMenu/TreeViewFilterSection";
+import * as TreeViewFilterStories from "./TreeViewFilterSection.stories";
+
 const meta = {
   title: "Filter Menu Components/FilterMenu",
   component: FilterMenu,
@@ -49,6 +52,7 @@ export const Primary: Story = {
         key="2"
       />,
       <RadioGroupFilterSection {...yearsArgs} key="3" />,
+      <TreeViewFilterSection {...TreeViewFilterStories.Primary.args} key="4" />,
     ],
     onSelectionChanged: (newVals, oldVals, action) => {
       console.log(action);

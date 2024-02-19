@@ -3,6 +3,7 @@ import FilterMenu, {
   FilterMenuSelectionChangedHandler,
 } from "../../src/components/FilterMenu";
 import { FilterSettingsValue } from "../../src/components/FilterMenu/FilterSettingsContext";
+import { CssBaseline } from "@mui/material";
 
 const createSettingsAndDefaults = () => {
   const filterkey = "example";
@@ -34,12 +35,14 @@ export default function FilterMenuSectionDecorator(Story: any, context: any) {
   const { map, defaults } = createSettingsAndDefaults();
 
   return (
-    <FilterMenu
-      onSelectionChanged={onSelectionChanged}
-      initialSelections={map}
-      defaultValues={defaults}
-    >
-      {Story()}
-    </FilterMenu>
+    <>
+      <FilterMenu
+        onSelectionChanged={onSelectionChanged}
+        initialSelections={map}
+        defaultValues={defaults}
+      >
+        {Story()}
+      </FilterMenu>
+    </>
   );
 }

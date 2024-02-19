@@ -21,12 +21,12 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     accordion: "false",
-    sectionid: "indikatorer",
-    sectiontitle: "Indikatorer",
-    filterkey: "indikatorer",
-    defaultvalues: [{ valueLabel: "Alle indikatorer", value: "all" }],
+    sectionid: "fagomraader",
+    sectiontitle: "Fagområder",
+    filterkey: "indicator",
+    defaultvalues: [{ valueLabel: "Alle fagområder", value: "all" }],
     radios: [
-      { valueLabel: "Alle indikatorer", value: "all" },
+      { valueLabel: "Alle fagområder", value: "all" },
       { valueLabel: "Hjerte- og karsykdommer", value: "hjerte" },
       { valueLabel: "Kreft", value: "kreft" },
       { valueLabel: "Luftveier", value: "luft" },
