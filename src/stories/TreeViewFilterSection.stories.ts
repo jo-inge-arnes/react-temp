@@ -83,5 +83,6 @@ export const InitialSelections: Story = {
       },
     ],
     treeData: treeData,
+    accordion: "false",
   },
 };
