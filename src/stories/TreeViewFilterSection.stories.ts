@@ -18,44 +18,46 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const treeData = [
+  {
+    nodeValue: { valueLabel: "Helse Nord RHF", value: "Helse Nord RHF" },
+    children: [
+      {
+        nodeValue: {
+          valueLabel: "Finnmarkssykehuset HF",
+          value: "Finnmark HF",
+        },
+        children: [
+          {
+            nodeValue: {
+              valueLabel: "Alta",
+              value: "Alta",
+            },
+          },
+          {
+            nodeValue: {
+              valueLabel: "Hammerfest",
+              value: "Hammerfest",
+            },
+          },
+        ],
+      },
+      {
+        nodeValue: {
+          valueLabel: "Helgelandssykehuset HF",
+          value: "Helgeland HF",
+        },
+      },
+    ],
+  },
+];
+
 export const Primary: Story = {
   args: {
     sectionid: "behandlingsenheter",
     sectiontitle: "Behandlingsenheter",
     filterkey: "treeviewfiltersection",
-    treeData: [
-      {
-        nodeValue: { valueLabel: "Helse Nord RHF", value: "Helse Nord RHF" },
-        children: [
-          {
-            nodeValue: {
-              valueLabel: "Finnmarkssykehuset HF",
-              value: "Finnmark HF",
-            },
-            children: [
-              {
-                nodeValue: {
-                  valueLabel: "Alta",
-                  value: "Alta",
-                },
-              },
-              {
-                nodeValue: {
-                  valueLabel: "Hammerfest",
-                  value: "Hammerfest",
-                },
-              },
-            ],
-          },
-          {
-            nodeValue: {
-              valueLabel: "Helgelandssykehuset HF",
-              value: "Helgeland HF",
-            },
-          },
-        ],
-      },
-    ],
+    treeData: treeData,
   },
 };
 
@@ -65,5 +67,25 @@ export const SingleSelect: Story = {
     sectiontitle: "Behandlingsenheter",
     filterkey: "selected_treatment_units",
     multiselect: false,
+    treeData: treeData,
+  },
+};
+
+export const InitialSelections: Story = {
+  args: {
+    sectionid: "behandlingsenheter",
+    sectiontitle: "Behandlingsenheter",
+    filterkey: "treeviewfiltersection",
+    initialselections: [
+      {
+        valueLabel: "Finnmarkssykehuset HF",
+        value: "Finnmark HF",
+      },
+      {
+        valueLabel: "Hammerfest",
+        value: "Hammerfest",
+      },
+    ],
+    treeData: treeData,
   },
 };

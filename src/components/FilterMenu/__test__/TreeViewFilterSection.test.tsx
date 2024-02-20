@@ -1,6 +1,11 @@
 import { vi, describe, it, expect } from "vitest";
-import { findFilterSettingValue, handleSelect } from "../TreeViewFilterSection";
+import {
+  flattenTreeValues,
+  handleSelect,
+  initFilterSettingsValuesMap,
+} from "../TreeViewFilterSection";
 import { FilterSettingsActionType } from "../FilterSettingsReducer";
+import exp from "constants";
 
 describe("TreeViewFilterSection", () => {
   const treeData = [
@@ -41,41 +46,85 @@ describe("TreeViewFilterSection", () => {
     },
   ];
 
-  describe("findFilterSettingValue()", () => {
-    it("should return the correct FilterSettingsValue for a root nodeId", () => {
-      const result = findFilterSettingValue("0", treeData);
-      expect(result).toEqual({
-        value: "rootValue",
-        valueLabel: "Root Value",
-      });
+  describe("flattenTreeValues()", () => {
+    it("should return an array of all node values", () => {
+      const result = flattenTreeValues([], treeData);
+      expect(result).toEqual([
+        { value: "rootValue", valueLabel: "Root Value", parentIds: [] },
+        {
+          value: "childValue-0-0",
+          valueLabel: "Child 0-0",
+          parentIds: ["rootValue"],
+        },
+        {
+          value: "childValue-0-1",
+          valueLabel: "Child 0-1",
+          parentIds: ["rootValue"],
+        },
+        {
+          value: "childValue-0-1-0",
+          valueLabel: "Child 0-1-0",
+          parentIds: ["rootValue", "childValue-0-1"],
+        },
+        { value: "rootValue2", valueLabel: "Root Value 2", parentIds: [] },
+      ]);
     });
-    it("should return the correct FilterSettingsValue for second root nodeId", () => {
-      const result = findFilterSettingValue("1", treeData);
-      expect(result).toEqual({
-        value: "rootValue2",
-        valueLabel: "Root Value 2",
-      });
-    });
-    it("should throw error for nodeId at non-existing level", () => {
-      expect(() => findFilterSettingValue("1-2", treeData)).toThrowError();
-    });
-    it("should throw error for nodeId at non-existing index", () => {
-      expect(() => findFilterSettingValue("2", treeData)).toThrowError();
-    });
-    it("should return correct child of a child node", () => {
-      const result = findFilterSettingValue("0-1-0", treeData);
-      expect(result).toEqual({
-        value: "childValue-0-1-0",
-        valueLabel: "Child 0-1-0",
-      });
+  });
+
+  describe("initFilterSettingsValuesMap()", () => {
+    it("should return a map with of all node values", () => {
+      const result = initFilterSettingsValuesMap(treeData);
+
+      expect(Array.from(result.entries())).toEqual([
+        [
+          "rootValue",
+          [{ value: "rootValue", valueLabel: "Root Value", parentIds: [] }],
+        ],
+        [
+          "childValue-0-0",
+          [
+            {
+              value: "childValue-0-0",
+              valueLabel: "Child 0-0",
+              parentIds: ["rootValue"],
+            },
+          ],
+        ],
+        [
+          "childValue-0-1",
+          [
+            {
+              value: "childValue-0-1",
+              valueLabel: "Child 0-1",
+              parentIds: ["rootValue"],
+            },
+          ],
+        ],
+        [
+          "childValue-0-1-0",
+          [
+            {
+              value: "childValue-0-1-0",
+              valueLabel: "Child 0-1-0",
+              parentIds: ["rootValue", "childValue-0-1"],
+            },
+          ],
+        ],
+        [
+          "rootValue2",
+          [{ value: "rootValue2", valueLabel: "Root Value 2", parentIds: [] }],
+        ],
+      ]);
     });
   });
 
   describe("handleSelect()", () => {
+    const idToValueMap = initFilterSettingsValuesMap(treeData);
+
     it("should work with a string, non-array nodeId", () => {
       const mockDispatch = vi.fn();
 
-      handleSelect("filterkey", "0", treeData, mockDispatch);
+      handleSelect("filterkey", "rootValue", idToValueMap, mockDispatch);
 
       expect(mockDispatch).toHaveBeenCalledWith({
         type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
@@ -89,13 +138,18 @@ describe("TreeViewFilterSection", () => {
     it("should work with array of nodeIds", () => {
       const mockDispatch = vi.fn();
 
-      handleSelect("filterkey", ["0", "0-1"], treeData, mockDispatch);
+      handleSelect("filterkey", "childValue-0-1", idToValueMap, mockDispatch);
 
       expect(mockDispatch).toHaveBeenCalledWith({
         type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
         sectionSetting: {
           key: "filterkey",
-          values: [treeData[0].nodeValue, treeData[0].children?.[1].nodeValue],
+          values: [
+            {
+              value: "childValue-0-1",
+              valueLabel: "Child 0-1",
+            },
+          ],
         },
       });
     });
