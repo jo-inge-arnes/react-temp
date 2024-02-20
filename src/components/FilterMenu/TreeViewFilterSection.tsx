@@ -61,6 +61,7 @@ const buildTreeLevel = (
     return (
       <TreeItem
         key={`${filterKey}-${node.nodeValue.value}-${position}`}
+        data-testid={`tree-view-section-item-${node.nodeValue.value}`}
         nodeId={node.nodeValue.value}
         label={node.nodeValue.valueLabel}
       >
@@ -231,6 +232,7 @@ export default function TreeViewFilterSection(props: TreeViewSectionProps) {
     <Box>
       <TreeView
         aria-label={`${props.sectiontitle} (TreeView)}`}
+        data-testid={`tree-view-section-${props.sectionid}`}
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
         multiSelect={isMultiSelect}

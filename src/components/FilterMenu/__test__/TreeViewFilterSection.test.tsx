@@ -1,12 +1,15 @@
 import { vi, describe, it, expect } from "vitest";
-import {
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import TreeViewFilterSection, {
   flattenTreeValues,
+  getSelectedNodeIds,
   handleSelect,
   initDefaultExpanded,
   initFilterSettingsValuesMap,
 } from "../TreeViewFilterSection";
 import { FilterSettingsActionType } from "../FilterSettingsReducer";
-import exp from "constants";
+import FilterMenu from "..";
 
 describe("TreeViewFilterSection", () => {
   const treeData = [
@@ -125,6 +128,21 @@ describe("TreeViewFilterSection", () => {
     });
   });
 
+  describe("getSelectedNodeIds()", () => {
+    it("should return an array of values for an array of FilterSettingsValue", () => {
+      const result = getSelectedNodeIds([
+        { value: "value", valueLabel: "label" },
+        { value: "value2", valueLabel: "label2" },
+      ]);
+      expect(result).toEqual(["value", "value2"]);
+    });
+
+    it("should return an empty array for undefined indput", () => {
+      const result = getSelectedNodeIds(undefined);
+      expect(result).toEqual([]);
+    });
+  });
+
   describe("handleSelect()", () => {
     const idToValueMap = initFilterSettingsValuesMap(treeData);
 
@@ -160,5 +178,74 @@ describe("TreeViewFilterSection", () => {
         },
       });
     });
+  });
+
+  describe("Rendered TreeViewFilterSection", () => {
+    it("should render the tree data", () => {
+      const result = render(
+        <FilterMenu>
+          <TreeViewFilterSection
+            sectionid="testSection"
+            sectiontitle="testTitle"
+            filterkey="testKey"
+            treeData={treeData}
+          />
+        </FilterMenu>,
+      );
+
+      const treeViewComponent = result.getByTestId(
+        "tree-view-section-testSection",
+      );
+      expect(treeViewComponent).toBeInTheDocument();
+    });
+
+    it("should select a node when clicked", async () => {
+      const user = userEvent.setup();
+      const selectionHandlerMock = vi.fn();
+
+      render(
+        <FilterMenu onSelectionChanged={selectionHandlerMock}>
+          <TreeViewFilterSection
+            sectionid="testSection"
+            sectiontitle="testTitle"
+            filterkey="testKey"
+            treeData={treeData}
+            accordion="false"
+          />
+        </FilterMenu>,
+      );
+
+      const treeViewItem = await screen.getByTestId(
+        "tree-view-section-item-rootValue",
+      );
+      await within(treeViewItem).getByText("Root Value").click();
+
+      expect(selectionHandlerMock).toHaveBeenCalled();
+      expect(treeViewItem.ariaSelected).toBe("true");
+    });
+  });
+
+  it("should expand tree to show initially selected nodes", () => {
+    const result = render(
+      <FilterMenu>
+        <TreeViewFilterSection
+          sectionid="testSection"
+          sectiontitle="testTitle"
+          filterkey="testKey"
+          treeData={treeData}
+          initialselections={[
+            {
+              value: "childValue-0-1-0",
+              valueLabel: "Child 0-1-0",
+            },
+          ]}
+          accordion="false"
+        />
+      </FilterMenu>,
+    );
+
+    expect(
+      result.getByTestId("tree-view-section-item-childValue-0-1-0"),
+    ).toBeVisible();
   });
 });
