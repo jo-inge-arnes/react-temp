@@ -1,6 +1,5 @@
 import { vi, describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import TreeViewFilterSection, {
   flattenTreeValues,
   getSelectedNodeIds,
@@ -200,7 +199,6 @@ describe("TreeViewFilterSection", () => {
     });
 
     it("should select a node when clicked", async () => {
-      const user = userEvent.setup();
       const selectionHandlerMock = vi.fn();
 
       render(
