@@ -2,6 +2,7 @@ import { vi, describe, it, expect } from "vitest";
 import {
   flattenTreeValues,
   handleSelect,
+  initDefaultExpanded,
   initFilterSettingsValuesMap,
 } from "../TreeViewFilterSection";
 import { FilterSettingsActionType } from "../FilterSettingsReducer";
@@ -78,43 +79,49 @@ describe("TreeViewFilterSection", () => {
       expect(Array.from(result.entries())).toEqual([
         [
           "rootValue",
-          [{ value: "rootValue", valueLabel: "Root Value", parentIds: [] }],
+          { value: "rootValue", valueLabel: "Root Value", parentIds: [] },
         ],
         [
           "childValue-0-0",
-          [
-            {
-              value: "childValue-0-0",
-              valueLabel: "Child 0-0",
-              parentIds: ["rootValue"],
-            },
-          ],
+          {
+            value: "childValue-0-0",
+            valueLabel: "Child 0-0",
+            parentIds: ["rootValue"],
+          },
         ],
         [
           "childValue-0-1",
-          [
-            {
-              value: "childValue-0-1",
-              valueLabel: "Child 0-1",
-              parentIds: ["rootValue"],
-            },
-          ],
+          {
+            value: "childValue-0-1",
+            valueLabel: "Child 0-1",
+            parentIds: ["rootValue"],
+          },
         ],
         [
           "childValue-0-1-0",
-          [
-            {
-              value: "childValue-0-1-0",
-              valueLabel: "Child 0-1-0",
-              parentIds: ["rootValue", "childValue-0-1"],
-            },
-          ],
+          {
+            value: "childValue-0-1-0",
+            valueLabel: "Child 0-1-0",
+            parentIds: ["rootValue", "childValue-0-1"],
+          },
         ],
         [
           "rootValue2",
-          [{ value: "rootValue2", valueLabel: "Root Value 2", parentIds: [] }],
+          { value: "rootValue2", valueLabel: "Root Value 2", parentIds: [] },
         ],
       ]);
+    });
+  });
+
+  describe("initDefaultExpanded()", () => {
+    it("should return an array of all parent values (deduped)", () => {
+      const map = initFilterSettingsValuesMap(treeData);
+      const result = initDefaultExpanded(
+        ["childValue-0-1-0", "rootValue2", "childValue-0-0"],
+        map,
+      );
+
+      expect(result).toEqual(["rootValue", "childValue-0-1"]);
     });
   });
 

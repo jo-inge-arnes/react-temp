@@ -91,7 +91,7 @@ export const buildTreeView = (props: TreeViewSectionProps) => {
 export const handleSelect = (
   filterKey: string,
   nodeIds: string[] | string,
-  idToValueMap: Map<string, TreeViewFilterSettingsValue[]>,
+  idToValueMap: Map<string, TreeViewFilterSettingsValue>,
   filterSettingsDispatch: React.Dispatch<FilterSettingsAction>,
 ) => {
   const selectedNodeIds = Array.isArray(nodeIds) ? nodeIds : [nodeIds];
@@ -163,18 +163,18 @@ export const flattenTreeValues = (
  * Initialzes the map used for looking up FilterSettingValues by values/nodeIds
  *
  * @param treeData The TreeViewFilterSectionNode structure
- * @returns A map with the string values as keys
+ * @returns A map with the string values as keys and TreeViewFilterSettingsValue-objects as values
  */
 export const initFilterSettingsValuesMap = (
   treeData: TreeViewFilterSectionNode[],
 ) => {
   const filterSettingsValuesMap = new Map<
     string,
-    TreeViewFilterSettingsValue[]
+    TreeViewFilterSettingsValue
   >();
   const treeValues = flattenTreeValues([], treeData);
   treeValues.forEach((value) => {
-    filterSettingsValuesMap.set(value.value, [value]);
+    filterSettingsValuesMap.set(value.value, value);
   });
   return filterSettingsValuesMap;
 };
@@ -182,22 +182,24 @@ export const initFilterSettingsValuesMap = (
 /**
  * Initializes the default expanded nodes for the TreeView
  *
- * @param treeData The tree structure
  * @param selectedIds The selected node ids
+ * @param filterSettingsValuesMap The map used for looking up FilterSettingValues by node ids
  * @returns A list of node ids that should be expanded by default
  */
 export const initDefaultExpanded = (
-  treeData: TreeViewFilterSectionNode[],
   selectedIds: string[],
+  filterSettingsValuesMap: Map<string, TreeViewFilterSettingsValue>,
 ) => {
   const defaultExpanded: string[] = [];
 
-  treeData.forEach((node) => {
-    if (selectedIds.includes(node.nodeValue.value)) {
-      defaultExpanded.push(node.nodeValue.value);
-    }
-    if (node.children) {
-      defaultExpanded.push(...initDefaultExpanded(node.children, selectedIds));
+  selectedIds.forEach((id) => {
+    const value = filterSettingsValuesMap.get(id);
+    if (value && value.parentIds) {
+      value.parentIds.forEach((parentId) => {
+        if (!defaultExpanded.includes(parentId)) {
+          defaultExpanded.push(parentId);
+        }
+      });
     }
   });
 
@@ -222,7 +224,7 @@ export default function TreeViewFilterSection(props: TreeViewSectionProps) {
     initFilterSettingsValuesMap(treeData),
   );
   const [defaultExpanded] = useState<string[]>(
-    initDefaultExpanded(treeData, selectedIds),
+    initDefaultExpanded(selectedIds, filterSettingsValuesMap),
   );
 
   return (

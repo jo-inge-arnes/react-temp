@@ -78,10 +78,6 @@ export const InitialSelections: Story = {
     filterkey: "treeviewfiltersection",
     initialselections: [
       {
-        valueLabel: "Finnmarkssykehuset HF",
-        value: "Finnmark HF",
-      },
-      {
         valueLabel: "Hammerfest",
         value: "Hammerfest",
       },
