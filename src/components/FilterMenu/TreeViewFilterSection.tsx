@@ -17,7 +17,7 @@ import { FilterSettingsActionType } from "./FilterSettingsReducer";
 /**
  * The structure of a node in the tree data used with the TreeViewFilterSection component
  */
-type TreeViewFilterSectionNode = {
+export type TreeViewFilterSectionNode = {
   nodeValue: FilterSettingsValue;
   children?: TreeViewFilterSectionNode[];
 };
@@ -26,7 +26,7 @@ type TreeViewFilterSectionNode = {
  * Same as FilterSettingsValue with the addition of a property with the
  * parent ids.
  */
-type TreeViewFilterSettingsValue = FilterSettingsValue & {
+export type TreeViewFilterSettingsValue = FilterSettingsValue & {
   parentIds: string[];
 };
 
@@ -37,9 +37,9 @@ type TreeViewFilterSettingsValue = FilterSettingsValue & {
  * Also accepts the multiselect prop, which is a boolean that determines whether the filter
  * is single or multi-select.
  */
-type TreeViewSectionProps = FilterMenuSectionProps & {
+export type TreeViewSectionProps = FilterMenuSectionProps & {
   multiselect?: boolean;
-  treeData: TreeViewFilterSectionNode[];
+  treedata: TreeViewFilterSectionNode[];
 };
 
 /**
@@ -78,7 +78,7 @@ const buildTreeLevel = (
  * @returns The TreeItem components for the TreeView
  */
 export const buildTreeView = (props: TreeViewSectionProps) => {
-  return <>{buildTreeLevel(props.treeData, props.filterkey, "")}</>;
+  return <>{buildTreeLevel(props.treedata, props.filterkey, "")}</>;
 };
 
 /**
@@ -214,12 +214,12 @@ export const initDefaultExpanded = (
  * @param props The props for the TreeViewFilterSection
  * @returns The TreeViewFilterSection component
  */
-export default function TreeViewFilterSection(props: TreeViewSectionProps) {
+export function TreeViewFilterSection(props: TreeViewSectionProps) {
   const filterSettings = useContext(FilterSettingsContext);
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
   const isMultiSelect = props.multiselect ?? true;
   const filterKey = props.filterkey;
-  const treeData = props.treeData;
+  const treeData = props.treedata;
   const selectedIds = getSelectedNodeIds(filterSettings.map.get(filterKey));
   const [filterSettingsValuesMap] = useState(
     initFilterSettingsValuesMap(treeData),
@@ -252,3 +252,5 @@ export default function TreeViewFilterSection(props: TreeViewSectionProps) {
     </Box>
   );
 }
+
+export default TreeViewFilterSection;

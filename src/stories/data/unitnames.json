@@ -1,0 +1,715 @@
+{
+  "opts_tu": [
+    {
+      "label": "Sykehus",
+      "options": [
+        { "label": "C-Medical", "value": "C-Medical" },
+        { "label": "Aleris Hinna Park", "value": "Aleris Hinna Park" },
+        { "label": "Medi 3 Hobøl", "value": "Medi 3 Hobøl" },
+        { "label": "Trasoppklinikken", "value": "Trasoppklinikken" },
+        { "label": "Betanien Skien", "value": "Betanien Skien" },
+        { "label": "Stavanger", "value": "Stavanger" },
+        { "label": "Hallingdal", "value": "Hallingdal" },
+        { "label": "Lillehammer", "value": "Lillehammer" },
+        { "label": "Rikshospitalet", "value": "Rikshospitalet" },
+        {
+          "label": "Kysthospitalet i Hagevik",
+          "value": "Kysthospitalet i Hagevik"
+        },
+        {
+          "label": "Mosjøen barne- og ungdomspsykiatri",
+          "value": "Mosjøen barne- og ungdomspsykiatri"
+        },
+        { "label": "Aleris Drammen", "value": "Aleris Drammen" },
+        { "label": "Ibsensykehusene", "value": "Ibsensykehusene" },
+        {
+          "label": "Blå Kors Lade behandlingssenter",
+          "value": "Blå Kors Lade behandlingssenter"
+        },
+        { "label": "Agro ØNH", "value": "Agro ØNH" },
+        { "label": "Ski ØNH", "value": "Ski ØNH" },
+        { "label": "Tønsberg", "value": "Tønsberg" },
+        { "label": "Medi 3 Oslo", "value": "Medi 3 Oslo" },
+        { "label": "Ålesund", "value": "Ålesund" },
+        {
+          "label": "Christiania Øre-Nese-Halsklinikk",
+          "value": "Christiania Øre-Nese-Halsklinikk"
+        },
+        { "label": "Klinikk Strand", "value": "Klinikk Strand" },
+        { "label": "St. Olav", "value": "St. Olav" },
+        {
+          "label": "Oslofjordklinikken Sandnes",
+          "value": "Oslofjordklinikken Sandnes"
+        },
+        {
+          "label": "Sarpsborg Spesialistsenter",
+          "value": "Sarpsborg Spesialistsenter"
+        },
+        { "label": "Parsennklinikken AS", "value": "Parsennklinikken AS" },
+        { "label": "Sunnaas", "value": "Sunnaas" },
+        { "label": "Colosseum", "value": "Colosseum" },
+        { "label": "Urologiklinikken AS", "value": "Urologiklinikken AS" },
+        { "label": "Sykehuset Oslo Øst", "value": "Sykehuset Oslo Øst" },
+        { "label": "Asker ØNH", "value": "Asker ØNH" },
+        {
+          "label": "Øre-nese-halssenteret, Sandnes",
+          "value": "Øre-nese-halssenteret, Sandnes"
+        },
+        {
+          "label": "Urologiklinikken Trondheim",
+          "value": "Urologiklinikken Trondheim"
+        },
+        { "label": "Volvat Stokkan", "value": "Volvat Stokkan" },
+        { "label": "Aleris Ålesund", "value": "Aleris Ålesund" },
+        { "label": "Volvat Åsane", "value": "Volvat Åsane" },
+        { "label": "Moelv Mage og Tarm", "value": "Moelv Mage og Tarm" },
+        { "label": "LHL Gardermoen", "value": "LHL Gardermoen" },
+        {
+          "label": "Ski urologiske spesialistsenter",
+          "value": "Ski urologiske spesialistsenter"
+        },
+        {
+          "label": "Romerike urologisk senter",
+          "value": "Romerike urologisk senter"
+        },
+        {
+          "label": "Blå Kors Loland Behandlingssenter",
+          "value": "Blå Kors Loland Behandlingssenter"
+        },
+        { "label": "Uro Sør Nygård", "value": "Uro Sør Nygård" },
+        { "label": "Finnsnes", "value": "Finnsnes" },
+        { "label": "Betanien Bergen", "value": "Betanien Bergen" },
+        {
+          "label": "Ålesund Mage Tarm klinikk",
+          "value": "Ålesund Mage Tarm klinikk"
+        },
+        { "label": "Colosseum Faust", "value": "Colosseum Faust" },
+        {
+          "label": "Privatklinikken i Skien",
+          "value": "Privatklinikken i Skien"
+        },
+        {
+          "label": "Majorstuen Spesialistsenter",
+          "value": "Majorstuen Spesialistsenter"
+        },
+        { "label": "Ahus Gardermoen", "value": "Ahus Gardermoen" },
+        {
+          "label": "Stavanger urologiske senter",
+          "value": "Stavanger urologiske senter"
+        },
+        {
+          "label": "Nordland urologiske klinikk",
+          "value": "Nordland urologiske klinikk"
+        },
+        { "label": "Diploma", "value": "Diploma" },
+        {
+          "label": "Sarpsborg diabetespoliklinikk",
+          "value": "Sarpsborg diabetespoliklinikk"
+        },
+        { "label": "Aleris", "value": "Aleris" },
+        { "label": "Bogstadveien ØNH", "value": "Bogstadveien ØNH" },
+        { "label": "Kirkens Bymisjon", "value": "Kirkens Bymisjon" },
+        { "label": "Volvat", "value": "Volvat" },
+        { "label": "Tyrilistiftelsen", "value": "Tyrilistiftelsen" },
+        {
+          "label": "Stiftelsen Solliakollektivet",
+          "value": "Stiftelsen Solliakollektivet"
+        },
+        {
+          "label": "Stiftelsen Valdresklinikken",
+          "value": "Stiftelsen Valdresklinikken"
+        },
+        {
+          "label": "Moelv spesialistsenter",
+          "value": "Moelv spesialistsenter"
+        },
+        { "label": "Rogaland A-senter", "value": "Rogaland A-senter" },
+        {
+          "label": "Stiftelsen Incognito klinikk",
+          "value": "Stiftelsen Incognito klinikk"
+        },
+        { "label": "Blå Kors, Borgestad", "value": "Blå Kors, Borgestad" },
+        {
+          "label": "Stiftelsen Fossum-kollektivet",
+          "value": "Stiftelsen Fossum-kollektivet"
+        },
+        { "label": "Stiftelsen Phoenix", "value": "Stiftelsen Phoenix" },
+        { "label": "Ski urologiske senter", "value": "Ski urologiske senter" },
+        {
+          "label": "Stiftelsen Manifestsenteret",
+          "value": "Stiftelsen Manifestsenteret"
+        },
+        { "label": "NIMI", "value": "NIMI" },
+        {
+          "label": "Aleris Rosenborgklinikken Trondheim",
+          "value": "Aleris Rosenborgklinikken Trondheim"
+        },
+        { "label": "Volvat Majorstuen", "value": "Volvat Majorstuen" },
+        { "label": "LHL Feiring", "value": "LHL Feiring" },
+        { "label": "Haugesund sanitet", "value": "Haugesund sanitet" },
+        {
+          "label": "Revmatismesykehuset Lillehammer",
+          "value": "Revmatismesykehuset Lillehammer"
+        },
+        { "label": "Haukeland", "value": "Haukeland" },
+        {
+          "label": "Martina Hansens hospital",
+          "value": "Martina Hansens hospital"
+        },
+        { "label": "Diakonhjemmet", "value": "Diakonhjemmet" },
+        { "label": "N.K.S. Olaviken", "value": "N.K.S. Olaviken" },
+        { "label": "Volvat Fredrikstad", "value": "Volvat Fredrikstad" },
+        { "label": "Lovisenberg", "value": "Lovisenberg" },
+        { "label": "Karasjok", "value": "Karasjok" },
+        { "label": "Haraldsplass", "value": "Haraldsplass" },
+        { "label": "Orkdal", "value": "Orkdal" },
+        {
+          "label": "Aleris Solsiden Trondheim",
+          "value": "Aleris Solsiden Trondheim"
+        },
+        { "label": "Aleris Bergen", "value": "Aleris Bergen" },
+        { "label": "Tromsø BUP", "value": "Tromsø BUP" },
+        { "label": "Skien", "value": "Skien" },
+        { "label": "Stavern", "value": "Stavern" },
+        { "label": "Aker", "value": "Aker" },
+        { "label": "Ullevål", "value": "Ullevål" },
+        { "label": "Flekkefjord", "value": "Flekkefjord" },
+        { "label": "Kristiansand", "value": "Kristiansand" },
+        { "label": "Drammen", "value": "Drammen" },
+        { "label": "Arendal", "value": "Arendal" },
+        { "label": "Kongsberg", "value": "Kongsberg" },
+        { "label": "Ringerike", "value": "Ringerike" },
+        { "label": "Elverum", "value": "Elverum" },
+        { "label": "Kongsvinger", "value": "Kongsvinger" },
+        { "label": "Gjøvik", "value": "Gjøvik" },
+        { "label": "Notodden", "value": "Notodden" },
+        { "label": "Porsgrunn", "value": "Porsgrunn" },
+        { "label": "Larvik", "value": "Larvik" },
+        { "label": "Askim", "value": "Askim" },
+        { "label": "Moss", "value": "Moss" },
+        { "label": "Kalnes", "value": "Kalnes" },
+        { "label": "Egersund", "value": "Egersund" },
+        { "label": "Follo DPS poliklinikk", "value": "Follo DPS poliklinikk" },
+        { "label": "Ski", "value": "Ski" },
+        { "label": "Bærum", "value": "Bærum" },
+        { "label": "Blakstad", "value": "Blakstad" },
+        { "label": "Ahus Nordbyhagen", "value": "Ahus Nordbyhagen" },
+        { "label": "Radiumhospitalet", "value": "Radiumhospitalet" },
+        { "label": "Haugesund", "value": "Haugesund" },
+        { "label": "Hamar", "value": "Hamar" },
+        { "label": "Tynset", "value": "Tynset" },
+        { "label": "Stord", "value": "Stord" },
+        { "label": "Odda", "value": "Odda" },
+        { "label": "Voss", "value": "Voss" },
+        { "label": "Førde", "value": "Førde" },
+        { "label": "Lærdal", "value": "Lærdal" },
+        { "label": "Nordfjord", "value": "Nordfjord" },
+        { "label": "Molde", "value": "Molde" },
+        { "label": "Kristiansund", "value": "Kristiansund" },
+        { "label": "Volda", "value": "Volda" },
+        { "label": "Røros", "value": "Røros" },
+        { "label": "Namsos", "value": "Namsos" },
+        { "label": "Levanger", "value": "Levanger" },
+        { "label": "Levanger psykiatri", "value": "Levanger psykiatri" },
+        { "label": "Bodø voksenpsykiatri", "value": "Bodø voksenpsykiatri" },
+        { "label": "Bodø", "value": "Bodø" },
+        { "label": "Narvik", "value": "Narvik" },
+        { "label": "Sandnessjøen", "value": "Sandnessjøen" },
+        { "label": "Mosjøen", "value": "Mosjøen" },
+        { "label": "Mo i Rana", "value": "Mo i Rana" },
+        { "label": "Lofoten", "value": "Lofoten" },
+        { "label": "Vesterålen", "value": "Vesterålen" },
+        { "label": "Harstad", "value": "Harstad" },
+        { "label": "Tromsø", "value": "Tromsø" },
+        { "label": "Hammerfest", "value": "Hammerfest" },
+        { "label": "Kirkenes", "value": "Kirkenes" },
+        { "label": "Norsk Diabetessenter", "value": "Norsk Diabetessenter" },
+        { "label": "Bodø BUP", "value": "Bodø BUP" },
+        {
+          "label": "Mosjøen voksenpsykiatri",
+          "value": "Mosjøen voksenpsykiatri"
+        },
+        { "label": "Stiftelsen Crux", "value": "Stiftelsen Crux" },
+        { "label": "Aleris Frogner", "value": "Aleris Frogner" },
+        { "label": "Ishavsklinikken", "value": "Ishavsklinikken" },
+        {
+          "label": "Nordmøre ØNH-Klinikk /Helix AS",
+          "value": "Nordmøre ØNH-Klinikk /Helix AS"
+        },
+        { "label": "Blå Kors Øst", "value": "Blå Kors Øst" },
+        {
+          "label": "Privatsykehuset Haugesund",
+          "value": "Privatsykehuset Haugesund"
+        },
+        { "label": "Medicus Trondheim", "value": "Medicus Trondheim" },
+        { "label": "Aleris Strømmen", "value": "Aleris Strømmen" },
+        { "label": "Alta", "value": "Alta" },
+        {
+          "label": "Stiftelsen Finnmarkskollektivet",
+          "value": "Stiftelsen Finnmarkskollektivet"
+        },
+        { "label": "Capio", "value": "Capio" },
+        { "label": "Aleris Agder", "value": "Aleris Agder" },
+        { "label": "Dr. Glad Nordahl", "value": "Dr. Glad Nordahl" },
+        {
+          "label": "Aleris Colosseum Nobel",
+          "value": "Aleris Colosseum Nobel"
+        },
+        { "label": "Dr. Grytli Holden", "value": "Dr. Grytli Holden" },
+        { "label": "Aleris Stavanger", "value": "Aleris Stavanger" },
+        { "label": "Kragerø", "value": "Kragerø" },
+        {
+          "label": "Stiftelsen Riisby Behandlingssenter",
+          "value": "Stiftelsen Riisby Behandlingssenter"
+        },
+        { "label": "Samtun", "value": "Samtun" },
+        {
+          "label": "OUS spiseforstyrrelser",
+          "value": "OUS spiseforstyrrelser"
+        },
+        { "label": "Dr. Skjøstad", "value": "Dr. Skjøstad" },
+        { "label": "Dr. Kristiansen", "value": "Dr. Kristiansen" },
+        { "label": "Dr. Miljeteig", "value": "Dr. Miljeteig" },
+        { "label": "Volvat Ulriksdalen", "value": "Volvat Ulriksdalen" },
+        {
+          "label": "Oslofjordklinikken Sandvika",
+          "value": "Oslofjordklinikken Sandvika"
+        },
+        {
+          "label": "Helse Bergen psykiatri",
+          "value": "Helse Bergen psykiatri"
+        },
+        {
+          "label": "Øre-Nese-Hals Klinikken, Moss",
+          "value": "Øre-Nese-Hals Klinikken, Moss"
+        },
+        { "label": "Best Helse AS", "value": "Best Helse AS" },
+        { "label": "Aleris Tromsø", "value": "Aleris Tromsø" },
+        { "label": "N.K.S. Kløveråsen", "value": "N.K.S. Kløveråsen" },
+        { "label": "Overnklinikken AS", "value": "Overnklinikken AS" },
+        { "label": "Idrettens helsesenter", "value": "Idrettens helsesenter" },
+        { "label": "Aleris Bodø", "value": "Aleris Bodø" },
+        {
+          "label": "Gaustad voksenpsykiatri",
+          "value": "Gaustad voksenpsykiatri"
+        },
+        { "label": "Revma Vestfold", "value": "Revma Vestfold" },
+        { "label": "Dede Klinikk", "value": "Dede Klinikk" },
+        { "label": "Medi 3 Ålesund", "value": "Medi 3 Ålesund" },
+        {
+          "label": "Kanalspesialistene Bergen",
+          "value": "Kanalspesialistene Bergen"
+        }
+      ]
+    },
+    {
+      "label": "HF",
+      "options": [
+        { "label": "Østfold HF", "value": "Østfold HF" },
+        { "label": "OUS HF", "value": "OUS HF" },
+        { "label": "Telemark HF", "value": "Telemark HF" },
+        { "label": "Sørlandet HF", "value": "Sørlandet HF" },
+        { "label": "Private klinikker", "value": "Private klinikker" },
+        { "label": "UNN HF", "value": "UNN HF" },
+        {
+          "label": "Private ideelle institusjoner",
+          "value": "Private ideelle institusjoner"
+        },
+        {
+          "label": "Private ideelle sykehus, Sør-Øst",
+          "value": "Private ideelle sykehus, Sør-Øst"
+        },
+        { "label": "Stavanger HF", "value": "Stavanger HF" },
+        { "label": "Helgeland HF", "value": "Helgeland HF" },
+        { "label": "Vestre Viken HF", "value": "Vestre Viken HF" },
+        { "label": "Innlandet HF", "value": "Innlandet HF" },
+        { "label": "Bergen HF", "value": "Bergen HF" },
+        {
+          "label": "Avtalespesialister, Sør-Øst",
+          "value": "Avtalespesialister, Sør-Øst"
+        },
+        { "label": "Vestfold HF", "value": "Vestfold HF" },
+        { "label": "Møre og Romsdal HF", "value": "Møre og Romsdal HF" },
+        {
+          "label": "Avtalespesialister, Vest",
+          "value": "Avtalespesialister, Vest"
+        },
+        { "label": "St. Olavs HF", "value": "St. Olavs HF" },
+        { "label": "Sunnaas HF", "value": "Sunnaas HF" },
+        {
+          "label": "Private ideelle sykehus, Vest",
+          "value": "Private ideelle sykehus, Vest"
+        },
+        {
+          "label": "Private ideelle sykehus, Nord",
+          "value": "Private ideelle sykehus, Nord"
+        },
+        { "label": "Akershus HF", "value": "Akershus HF" },
+        {
+          "label": "Diakonhjemmet sykehus AS",
+          "value": "Diakonhjemmet sykehus AS"
+        },
+        {
+          "label": "Lovisenberg diakonale sykehus AS",
+          "value": "Lovisenberg diakonale sykehus AS"
+        },
+        { "label": "Finnmark HF", "value": "Finnmark HF" },
+        {
+          "label": "Haraldsplass diakonale sykehus AS",
+          "value": "Haraldsplass diakonale sykehus AS"
+        },
+        { "label": "Fonna HF", "value": "Fonna HF" },
+        { "label": "Førde HF", "value": "Førde HF" },
+        { "label": "Nord-Trøndelag HF", "value": "Nord-Trøndelag HF" },
+        { "label": "Nordland HF", "value": "Nordland HF" },
+        {
+          "label": "Avtalespesialister, Nord",
+          "value": "Avtalespesialister, Nord"
+        },
+        {
+          "label": "Avtalespesialister, Midt",
+          "value": "Avtalespesialister, Midt"
+        }
+      ]
+    },
+    {
+      "label": "RHF",
+      "options": [
+        { "label": "Helse Sør-Øst RHF", "value": "Helse Sør-Øst RHF" },
+        { "label": "Private", "value": "Private" },
+        { "label": "Helse Nord RHF", "value": "Helse Nord RHF" },
+        { "label": "Helse Vest RHF", "value": "Helse Vest RHF" },
+        { "label": "Helse Midt-Norge RHF", "value": "Helse Midt-Norge RHF" }
+      ]
+    }
+  ],
+  "nestedUnitNames": [
+    {
+      "rhf": "Helse Midt-Norge RHF",
+      "hf": [
+        {
+          "hf": "Avtalespesialister, Midt",
+          "hf_full": "Avtalespesialister",
+          "hospital": ["Dr. Skjøstad", "Nordmøre ØNH-Klinikk /Helix AS"]
+        },
+        {
+          "hf": "Møre og Romsdal HF",
+          "hf_full": "Helse Møre og Romsdal HF",
+          "hospital": ["Kristiansund", "Molde", "Volda", "Ålesund"]
+        },
+        {
+          "hf": "Nord-Trøndelag HF",
+          "hf_full": "Helse Nord-Trøndelag HF",
+          "hospital": ["Levanger", "Levanger psykiatri", "Namsos"]
+        },
+        {
+          "hf": "St. Olavs HF",
+          "hf_full": "St. Olavs hospital HF",
+          "hospital": ["Orkdal", "Røros", "St. Olav"]
+        }
+      ]
+    },
+    {
+      "rhf": "Helse Nord RHF",
+      "hf": [
+        {
+          "hf": "Avtalespesialister, Nord",
+          "hf_full": "Avtalespesialister",
+          "hospital": ["Ishavsklinikken"]
+        },
+        {
+          "hf": "Finnmark HF",
+          "hf_full": "Finnmarkssykehuset HF",
+          "hospital": ["Alta", "Hammerfest", "Karasjok", "Kirkenes"]
+        },
+        {
+          "hf": "Helgeland HF",
+          "hf_full": "Helgelandssykehuset HF",
+          "hospital": [
+            "Mo i Rana",
+            "Mosjøen",
+            "Mosjøen barne- og ungdomspsykiatri",
+            "Mosjøen voksenpsykiatri",
+            "Sandnessjøen"
+          ]
+        },
+        {
+          "hf": "Nordland HF",
+          "hf_full": "Nordlandssykehuset HF",
+          "hospital": [
+            "Bodø",
+            "Bodø BUP",
+            "Bodø voksenpsykiatri",
+            "Lofoten",
+            "Vesterålen"
+          ]
+        },
+        {
+          "hf": "Private ideelle sykehus, Nord",
+          "hf_full": "Private ideelle sykehus",
+          "hospital": ["Majorstuen Spesialistsenter", "N.K.S. Kløveråsen"]
+        },
+        {
+          "hf": "UNN HF",
+          "hf_full": "Universitetssykehuset Nord-Norge HF",
+          "hospital": ["Finnsnes", "Harstad", "Narvik", "Tromsø", "Tromsø BUP"]
+        }
+      ]
+    },
+    {
+      "rhf": "Helse Sør-Øst RHF",
+      "hf": [
+        {
+          "hf": "Akershus HF",
+          "hf_full": "Akershus universitetssykehus HF",
+          "hospital": [
+            "Ahus Gardermoen",
+            "Ahus Nordbyhagen",
+            "Follo DPS poliklinikk",
+            "Kongsvinger",
+            "Ski"
+          ]
+        },
+        {
+          "hf": "Avtalespesialister, Sør-Øst",
+          "hf_full": "Avtalespesialister",
+          "hospital": [
+            "Agro ØNH",
+            "Asker ØNH",
+            "Bogstadveien ØNH",
+            "Christiania Øre-Nese-Halsklinikk",
+            "Diploma",
+            "Revma Vestfold",
+            "Ski ØNH",
+            "Øre-Nese-Hals Klinikken, Moss"
+          ]
+        },
+        {
+          "hf": "Diakonhjemmet sykehus AS",
+          "hf_full": "Diakonhjemmet sykehus AS",
+          "hospital": ["Diakonhjemmet"]
+        },
+        {
+          "hf": "Lovisenberg diakonale sykehus AS",
+          "hf_full": "Lovisenberg diakonale sykehus AS",
+          "hospital": ["Lovisenberg"]
+        },
+        {
+          "hf": "OUS HF",
+          "hf_full": "Oslo universitetssykehus HF",
+          "hospital": [
+            "Aker",
+            "Gaustad voksenpsykiatri",
+            "OUS spiseforstyrrelser",
+            "Radiumhospitalet",
+            "Rikshospitalet",
+            "Ullevål"
+          ]
+        },
+        {
+          "hf": "Private ideelle sykehus, Sør-Øst",
+          "hf_full": "Private ideelle sykehus",
+          "hospital": [
+            "Betanien Skien",
+            "Martina Hansens hospital",
+            "Revmatismesykehuset Lillehammer"
+          ]
+        },
+        {
+          "hf": "Sunnaas HF",
+          "hf_full": "Sunnaas sykehus HF",
+          "hospital": ["Sunnaas"]
+        },
+        {
+          "hf": "Innlandet HF",
+          "hf_full": "Sykehuset Innlandet HF",
+          "hospital": ["Elverum", "Gjøvik", "Hamar", "Lillehammer", "Tynset"]
+        },
+        {
+          "hf": "Telemark HF",
+          "hf_full": "Sykehuset Telemark HF",
+          "hospital": ["Kragerø", "Notodden", "Porsgrunn", "Skien"]
+        },
+        {
+          "hf": "Vestfold HF",
+          "hf_full": "Sykehuset i Vestfold HF",
+          "hospital": ["Larvik", "Stavern", "Tønsberg"]
+        },
+        {
+          "hf": "Østfold HF",
+          "hf_full": "Sykehuset Østfold HF",
+          "hospital": [
+            "Askim",
+            "Kalnes",
+            "Moss",
+            "Sarpsborg diabetespoliklinikk"
+          ]
+        },
+        {
+          "hf": "Sørlandet HF",
+          "hf_full": "Sørlandet sykehus HF",
+          "hospital": ["Arendal", "Flekkefjord", "Kristiansand"]
+        },
+        {
+          "hf": "Vestre Viken HF",
+          "hf_full": "Vestre Viken HF",
+          "hospital": [
+            "Blakstad",
+            "Bærum",
+            "Drammen",
+            "Hallingdal",
+            "Kongsberg",
+            "Ringerike"
+          ]
+        }
+      ]
+    },
+    {
+      "rhf": "Helse Vest RHF",
+      "hf": [
+        {
+          "hf": "Avtalespesialister, Vest",
+          "hf_full": "Avtalespesialister",
+          "hospital": [
+            "Dr. Glad Nordahl",
+            "Dr. Grytli Holden",
+            "Dr. Kristiansen",
+            "Dr. Miljeteig",
+            "Klinikk Strand",
+            "Øre-nese-halssenteret, Sandnes"
+          ]
+        },
+        {
+          "hf": "Haraldsplass diakonale sykehus AS",
+          "hf_full": "Haraldsplass diakonale sykehus AS",
+          "hospital": ["Haraldsplass"]
+        },
+        {
+          "hf": "Bergen HF",
+          "hf_full": "Helse Bergen HF",
+          "hospital": [
+            "Haukeland",
+            "Helse Bergen psykiatri",
+            "Kysthospitalet i Hagevik",
+            "Voss"
+          ]
+        },
+        {
+          "hf": "Fonna HF",
+          "hf_full": "Helse Fonna HF",
+          "hospital": ["Haugesund", "Odda", "Stord"]
+        },
+        {
+          "hf": "Førde HF",
+          "hf_full": "Helse Førde HF",
+          "hospital": ["Førde", "Lærdal", "Nordfjord"]
+        },
+        {
+          "hf": "Stavanger HF",
+          "hf_full": "Helse Stavanger HF",
+          "hospital": ["Egersund", "Stavanger"]
+        },
+        {
+          "hf": "Private ideelle sykehus, Vest",
+          "hf_full": "Private ideelle sykehus",
+          "hospital": [
+            "Betanien Bergen",
+            "Haugesund sanitet",
+            "N.K.S. Olaviken"
+          ]
+        }
+      ]
+    },
+    {
+      "rhf": "Private",
+      "hf": [
+        {
+          "hf": "Private ideelle institusjoner",
+          "hf_full": "Private ideelle institusjoner",
+          "hospital": [
+            "Blå Kors Lade behandlingssenter",
+            "Blå Kors Loland Behandlingssenter",
+            "Blå Kors Øst",
+            "Blå Kors, Borgestad",
+            "Kirkens Bymisjon",
+            "Rogaland A-senter",
+            "Samtun",
+            "Stiftelsen Crux",
+            "Stiftelsen Finnmarkskollektivet",
+            "Stiftelsen Fossum-kollektivet",
+            "Stiftelsen Incognito klinikk",
+            "Stiftelsen Manifestsenteret",
+            "Stiftelsen Phoenix",
+            "Stiftelsen Riisby Behandlingssenter",
+            "Stiftelsen Solliakollektivet",
+            "Stiftelsen Valdresklinikken",
+            "Trasoppklinikken",
+            "Tyrilistiftelsen"
+          ]
+        },
+        {
+          "hf": "Private klinikker",
+          "hf_full": "Private klinikker",
+          "hospital": [
+            "Aleris",
+            "Aleris Agder",
+            "Aleris Bergen",
+            "Aleris Bodø",
+            "Aleris Colosseum Nobel",
+            "Aleris Drammen",
+            "Aleris Frogner",
+            "Aleris Hinna Park",
+            "Aleris Rosenborgklinikken Trondheim",
+            "Aleris Solsiden Trondheim",
+            "Aleris Stavanger",
+            "Aleris Strømmen",
+            "Aleris Tromsø",
+            "Aleris Ålesund",
+            "Best Helse AS",
+            "C-Medical",
+            "Capio",
+            "Colosseum",
+            "Colosseum Faust",
+            "Dede Klinikk",
+            "Ibsensykehusene",
+            "Idrettens helsesenter",
+            "Kanalspesialistene Bergen",
+            "LHL Feiring",
+            "LHL Gardermoen",
+            "Medi 3 Hobøl",
+            "Medi 3 Oslo",
+            "Medi 3 Ålesund",
+            "Medicus Trondheim",
+            "Moelv Mage og Tarm",
+            "Moelv spesialistsenter",
+            "NIMI",
+            "Nordland urologiske klinikk",
+            "Norsk Diabetessenter",
+            "Oslofjordklinikken Sandnes",
+            "Oslofjordklinikken Sandvika",
+            "Overnklinikken AS",
+            "Parsennklinikken AS",
+            "Privatklinikken i Skien",
+            "Privatsykehuset Haugesund",
+            "Romerike urologisk senter",
+            "Sarpsborg Spesialistsenter",
+            "Ski urologiske senter",
+            "Ski urologiske spesialistsenter",
+            "Stavanger urologiske senter",
+            "Sykehuset Oslo Øst",
+            "Uro Sør Nygård",
+            "Urologiklinikken AS",
+            "Urologiklinikken Trondheim",
+            "Volvat",
+            "Volvat Fredrikstad",
+            "Volvat Majorstuen",
+            "Volvat Stokkan",
+            "Volvat Ulriksdalen",
+            "Volvat Åsane",
+            "Ålesund Mage Tarm klinikk"
+          ]
+        }
+      ]
+    }
+  ]
+}

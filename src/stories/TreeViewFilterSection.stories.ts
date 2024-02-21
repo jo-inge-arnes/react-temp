@@ -57,7 +57,7 @@ export const Primary: Story = {
     sectionid: "behandlingsenheter",
     sectiontitle: "Behandlingsenheter",
     filterkey: "treeviewfiltersection",
-    treeData: treeData,
+    treedata: treeData,
   },
 };
 
@@ -67,7 +67,7 @@ export const SingleSelect: Story = {
     sectiontitle: "Behandlingsenheter",
     filterkey: "selected_treatment_units",
     multiselect: false,
-    treeData: treeData,
+    treedata: treeData,
   },
 };
 
@@ -82,7 +82,7 @@ export const InitialSelections: Story = {
         value: "Hammerfest",
       },
     ],
-    treeData: treeData,
+    treedata: treeData,
     accordion: "false",
   },
 };

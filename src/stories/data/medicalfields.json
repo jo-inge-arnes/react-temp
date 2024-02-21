@@ -1,0 +1,125 @@
+[
+  {
+    "shortName": "hjerte",
+    "name": "Hjerte- og karsykdommer",
+    "registers": [
+      "hjerneslag",
+      "hjerteinfarkt",
+      "noric",
+      "norkar",
+      "hjertesvikt",
+      "hjertestans",
+      "ablanor",
+      "hjertekirurgi"
+    ]
+  },
+  {
+    "shortName": "kreft",
+    "name": "Kreft",
+    "registers": [
+      "lymfoid",
+      "tarmkreft_colon",
+      "tarmkreft_rectum",
+      "barnekreft",
+      "gynkreft",
+      "lungekreft",
+      "prostata",
+      "brystkreft",
+      "melanom",
+      "livmorhalskreft",
+      "ovarialkreft"
+    ]
+  },
+  { "shortName": "luft", "name": "Luftveier", "registers": ["mek_vent"] },
+  {
+    "shortName": "diabetes",
+    "name": "Diabetes",
+    "registers": ["barnediabetes", "diabetes_voksne"]
+  },
+  {
+    "shortName": "nerve",
+    "name": "Nervesystemet",
+    "registers": ["ms", "cp", "parkinson", "norkog"]
+  },
+  {
+    "shortName": "muskel",
+    "name": "Muskel og skjelett",
+    "registers": [
+      "hoftebrudd",
+      "muskel",
+      "nkr_nakke",
+      "nnrr",
+      "nkr_rygg",
+      "korsband",
+      "leddprotese",
+      "barnehofte"
+    ]
+  },
+  {
+    "shortName": "tarm",
+    "name": "Mage og tarm",
+    "registers": [
+      "norgast",
+      "nra",
+      "tarmkreft_colon",
+      "tarmkreft_rectum",
+      "soreg",
+      "gastronet"
+    ]
+  },
+  {
+    "shortName": "gyn",
+    "name": "Gynekologi",
+    "registers": ["nger", "gynkreft", "nkir", "livmorhalskreft", "ovarialkreft"]
+  },
+  { "shortName": "nyre", "name": "Nyre", "registers": ["nyre"] },
+  {
+    "shortName": "intensiv",
+    "name": "Skade og intensiv",
+    "registers": ["intensiv", "traume", "pandemi", "nnk"]
+  },
+  {
+    "shortName": "rehab",
+    "name": "Rehabilitering",
+    "registers": ["nnrr", "norscir"]
+  },
+  {
+    "shortName": "onh",
+    "name": "Øre-nese-hals",
+    "registers": ["tonsille", "horsel_barn"]
+  },
+  {
+    "shortName": "hud",
+    "name": "Hudsykdommer",
+    "registers": ["hisreg", "melanom"]
+  },
+  {
+    "shortName": "psyk",
+    "name": "Psykisk helse og rus",
+    "registers": ["norspis", "kvarus"]
+  },
+  {
+    "shortName": "autoimmun",
+    "name": "Autoimmune sykdommer",
+    "registers": ["norvas", "roas"]
+  },
+  {
+    "shortName": "revma",
+    "name": "Revmatologi",
+    "registers": ["norvas", "norartritt"]
+  },
+  {
+    "shortName": "barn",
+    "name": "Barn",
+    "registers": [
+      "barnekreft",
+      "barnediabetes",
+      "lkg",
+      "cp",
+      "nnk",
+      "barnehofte",
+      "horsel_barn"
+    ]
+  },
+  { "shortName": "annet", "name": "Andre", "registers": ["smerte", "porfyri"] }
+]

@@ -1,3 +1,4 @@
+import React from "react";
 import { vi, describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import TreeViewFilterSection, {
@@ -188,7 +189,7 @@ describe("TreeViewFilterSection", () => {
             sectionid="testSection"
             sectiontitle="testTitle"
             filterkey="testKey"
-            treeData={treeData}
+            treedata={treeData}
           />
         </FilterMenu>,
       );
@@ -208,7 +209,7 @@ describe("TreeViewFilterSection", () => {
             sectionid="testSection"
             sectiontitle="testTitle"
             filterkey="testKey"
-            treeData={treeData}
+            treedata={treeData}
             accordion="false"
           />
         </FilterMenu>,
@@ -223,29 +224,29 @@ describe("TreeViewFilterSection", () => {
       expect(selectionHandlerMock).toHaveBeenCalled();
       expect(treeViewItem.ariaSelected).toBe("true");
     });
-  });
 
-  it("should expand tree to show initially selected nodes", () => {
-    const result = render(
-      <FilterMenu>
-        <TreeViewFilterSection
-          sectionid="testSection"
-          sectiontitle="testTitle"
-          filterkey="testKey"
-          treeData={treeData}
-          initialselections={[
-            {
-              value: "childValue-0-1-0",
-              valueLabel: "Child 0-1-0",
-            },
-          ]}
-          accordion="false"
-        />
-      </FilterMenu>,
-    );
+    it("should expand tree to show initially selected nodes", () => {
+      const result = render(
+        <FilterMenu>
+          <TreeViewFilterSection
+            sectionid="testSection"
+            sectiontitle="testTitle"
+            filterkey="testKey"
+            treedata={treeData}
+            initialselections={[
+              {
+                value: "childValue-0-1-0",
+                valueLabel: "Child 0-1-0",
+              },
+            ]}
+            accordion="false"
+          />
+        </FilterMenu>,
+      );
 
-    expect(
-      result.getByTestId("tree-view-section-item-childValue-0-1-0"),
-    ).toBeVisible();
+      expect(
+        result.getByTestId("tree-view-section-item-childValue-0-1-0"),
+      ).toBeVisible();
+    });
   });
 });
