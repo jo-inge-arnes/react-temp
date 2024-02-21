@@ -9,6 +9,7 @@ import TreeViewFilterSection, {
 } from "../TreeViewFilterSection";
 import { FilterSettingsActionType } from "../FilterSettingsReducer";
 import FilterMenu from "..";
+import { act } from "react-dom/test-utils";
 
 describe("TreeViewFilterSection", () => {
   const treeData = [
@@ -216,7 +217,8 @@ describe("TreeViewFilterSection", () => {
       const treeViewItem = await screen.getByTestId(
         "tree-view-section-item-rootValue",
       );
-      await within(treeViewItem).getByText("Root Value").click();
+
+      await act(() => within(treeViewItem).getByText("Root Value").click());
 
       expect(selectionHandlerMock).toHaveBeenCalled();
       expect(treeViewItem.ariaSelected).toBe("true");
