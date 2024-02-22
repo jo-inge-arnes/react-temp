@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { TreeView } from "@mui/x-tree-view/TreeView";
-import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import { FilterMenuSectionProps } from ".";
 import {
   FilterSettingsContext,
@@ -13,9 +12,6 @@ import {
 import { FilterSettingsDispatchContext } from "./FilterSettingsReducer";
 import { FilterSettingsAction } from "./FilterSettingsReducer";
 import { FilterSettingsActionType } from "./FilterSettingsReducer";
-import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { TreeViewFilterSectionItem } from "./TreeViewFilterSectionItem";
 
 /**
@@ -110,40 +106,6 @@ export const buildTreeView = (
 };
 
 /**
- * Function used for updating the FilterMenu state when the user selects nodes in the TreeView
- *
- * @param filterKey The filter key for the section
- * @param nodeIds The nodeId or nodeIds of the selected nodes
- * @param idToValueMap The map used for looking up FilterSettingValues by values/nodeIds
- * @param filterSettingsDispatch The dispatch function for the filter settings reducer that manages changes to the filter settings state
- */
-export const handleSelect = (
-  filterKey: string,
-  nodeIds: string[] | string,
-  idToValueMap: Map<string, TreeViewFilterSettingsValue>,
-  filterSettingsDispatch: React.Dispatch<FilterSettingsAction>,
-) => {
-  const selectedNodeIds = Array.isArray(nodeIds) ? nodeIds : [nodeIds];
-  const selectedFilterSettingValues = selectedNodeIds
-    .map((nodeId) => idToValueMap.get(nodeId))
-    .filter((value) => value !== undefined)
-    .flat() as TreeViewFilterSettingsValue[];
-
-  filterSettingsDispatch({
-    type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
-    sectionSetting: {
-      key: filterKey,
-      values: selectedFilterSettingValues.map((value) => {
-        return {
-          value: value.value,
-          valueLabel: value.valueLabel,
-        };
-      }),
-    },
-  });
-};
-
-/**
  * Function used to retrieve the selected values from the filter settings state
  *
  * @param values The FilterSettingsValue array for the section
@@ -235,21 +197,14 @@ export const initDefaultExpanded = (
   return defaultExpanded;
 };
 
-/**
- * Component for use with the FilterMenu component, which uses a TreeView to display filter options.
- * The component can be used for either single or multi-select filters.
- *
- * @param props The props for the TreeViewFilterSection
- * @returns The TreeViewFilterSection component
- */
-export function TreeViewFilterSection(props: TreeViewSectionProps) {
-  /**
-   * Handles the change events for the checkboxes in the TreeViewFilterSectionItems
-   *
-   * @param checked If the checkbox is checked
-   * @param nodeId The value of the tree node with the checkbox
-   */
-  const handleCheckboxChange = (checked: boolean, nodeId: string) => {
+const selectionHandlerBuilder = (
+  selectedIds: string[],
+  filterKey: string,
+  isMultiSelect: boolean,
+  filterSettingsValuesMap: Map<string, TreeViewFilterSettingsValue>,
+  filterSettingsDispatch: React.Dispatch<FilterSettingsAction>,
+) => {
+  return (checked: boolean, nodeId: string) => {
     let updatedSelectedIds = selectedIds;
 
     if (checked) {
@@ -262,16 +217,37 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
       updatedSelectedIds = selectedIds.filter((id) => id !== nodeId);
     }
 
-    handleSelect(
-      filterKey,
-      updatedSelectedIds,
-      filterSettingsValuesMap,
-      filterSettingsDispatch,
-    );
-  };
+    const selectedFilterSettingValues = updatedSelectedIds
+      .map((nodeId) => filterSettingsValuesMap.get(nodeId))
+      .filter((value) => value !== undefined)
+      .flat() as TreeViewFilterSettingsValue[];
 
+    filterSettingsDispatch({
+      type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
+      sectionSetting: {
+        key: filterKey,
+        values: selectedFilterSettingValues.map((value) => {
+          return {
+            value: value.value,
+            valueLabel: value.valueLabel,
+          };
+        }),
+      },
+    });
+  };
+};
+
+/**
+ * Component for use with the FilterMenu component, which uses a TreeView to display filter options.
+ * The component can be used for either single or multi-select filters.
+ *
+ * @param props The props for the TreeViewFilterSection
+ * @returns The TreeViewFilterSection component
+ */
+export function TreeViewFilterSection(props: TreeViewSectionProps) {
   const filterSettings = useContext(FilterSettingsContext);
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
+
   const isMultiSelect = props.multiselect ?? true;
   const filterKey = props.filterkey;
   const treeData = props.treedata;
@@ -283,6 +259,14 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
     initDefaultExpanded(selectedIds, filterSettingsValuesMap),
   );
 
+  const handleCheckboxChange = selectionHandlerBuilder(
+    selectedIds,
+    filterKey,
+    isMultiSelect,
+    filterSettingsValuesMap,
+    filterSettingsDispatch,
+  );
+
   return (
     <Box>
       <TreeView
@@ -290,17 +274,7 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
         data-testid={`tree-view-section-${props.sectionid}`}
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
-        // multiSelect={isMultiSelect}
-        // selected={selectedIds}
         defaultExpanded={defaultExpanded}
-        // onNodeSelect={(event, nodeIds) =>
-        //   handleSelect(
-        //     filterKey,
-        //     nodeIds,
-        //     filterSettingsValuesMap,
-        //     filterSettingsDispatch,
-        //   )
-        // }
       >
         {buildTreeView(props, selectedIds, handleCheckboxChange)}
       </TreeView>
