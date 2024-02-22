@@ -13,6 +13,8 @@ import {
 import { FilterSettingsDispatchContext } from "./FilterSettingsReducer";
 import { FilterSettingsAction } from "./FilterSettingsReducer";
 import { FilterSettingsActionType } from "./FilterSettingsReducer";
+import Checkbox from "@mui/material/Checkbox";
+import Typography from "@mui/material/Typography";
 
 /**
  * The structure of a node in the tree data used with the TreeViewFilterSection component
@@ -63,7 +65,12 @@ const buildTreeLevel = (
         key={`${filterKey}-${node.nodeValue.value}-${position}`}
         data-testid={`tree-view-section-item-${node.nodeValue.value}`}
         nodeId={node.nodeValue.value}
-        label={node.nodeValue.valueLabel}
+        label={
+          <>
+            <Checkbox />
+            {node.nodeValue.valueLabel}
+          </>
+        }
       >
         {node.children && buildTreeLevel(node.children, filterKey, position)}
       </TreeItem>

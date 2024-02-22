@@ -6,6 +6,7 @@ import RadioGroupFilterSection from "./RadioGroupFilterSection";
 import TreeViewFilterSection, {
   TreeViewFilterSectionNode,
 } from "./TreeViewFilterSection";
+import { Radio } from "@mui/material";
 
 /**
  * The options for the radio group filter sections.
@@ -55,6 +56,18 @@ export const getStandardGoalAccomplishment = (
   );
 };
 
+export const getYearOptions = () => {
+  return {
+    default: { value: "2023", valueLabel: "2023" },
+    options: [
+      { value: "2021", valueLabel: "2021" },
+      { value: "2022", valueLabel: "2022" },
+      { value: "2023", valueLabel: "2023" },
+      { value: "2024", valueLabel: "2024" },
+    ],
+  };
+};
+
 /**
  * Filter menu for treatment quality page.
  */
@@ -69,6 +82,7 @@ export function TreatmentQualityFilterMenu(
   const goalAccomplishmentOptions = goalAccomplishments.options;
   const goalAccomplishmentDefault = goalAccomplishments.default;
   const treatmentUnitsTree = props.treatmentunitstree;
+  const yearOptions = getYearOptions();
 
   return (
     <FilterMenu onSelectionChanged={props.onSelectionChanged}>
@@ -77,6 +91,13 @@ export function TreatmentQualityFilterMenu(
         sectiontitle={"Valgte filtre"}
         filterkey={"selected-filter-chips"}
         accordion="false"
+      />
+      <RadioGroupFilterSection
+        radios={yearOptions.options}
+        defaultvalues={[yearOptions.default]}
+        sectiontitle={"År"}
+        sectionid={"year"}
+        filterkey={"year"}
       />
       <RadioGroupFilterSection
         radios={goalAccomplishmentOptions}
