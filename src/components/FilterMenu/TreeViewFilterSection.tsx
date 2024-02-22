@@ -16,6 +16,7 @@ import { FilterSettingsActionType } from "./FilterSettingsReducer";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { TreeViewFilterSectionItem } from "./TreeViewFilterSectionItem";
 
 /**
  * The structure of a node in the tree data used with the TreeViewFilterSection component
@@ -64,30 +65,12 @@ const buildTreeLevel = (
     const position = prefix ? `${prefix}-${index}` : `${index}`;
 
     return (
-      <TreeItem
-        key={`${filterKey}-${node.nodeValue.value}-${position}`}
-        data-testid={`tree-view-section-item-${node.nodeValue.value}`}
-        nodeId={node.nodeValue.value}
-        label={
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  key={`checkbox-${filterKey}-${node.nodeValue.value}-${position}`}
-                  data-testid={`checkbox-tree-view-section-item-${node.nodeValue.value}`}
-                  checked={selectedIds.includes(node.nodeValue.value)}
-                  onChange={(event) => {
-                    handleCheckboxChange(
-                      event.target.checked,
-                      node.nodeValue.value,
-                    );
-                  }}
-                />
-              }
-              label={node.nodeValue.valueLabel}
-            />
-          </FormGroup>
-        }
+      <TreeViewFilterSectionItem
+        key={`tree-view-item-${filterKey}-${node.nodeValue.value}`}
+        filterKey={filterKey}
+        labeledValue={node.nodeValue}
+        selectedIds={selectedIds}
+        handleCheckboxChange={handleCheckboxChange}
       >
         {node.children &&
           buildTreeLevel(
@@ -97,7 +80,7 @@ const buildTreeLevel = (
             selectedIds,
             handleCheckboxChange,
           )}
-      </TreeItem>
+      </TreeViewFilterSectionItem>
     );
   });
 };
@@ -260,6 +243,33 @@ export const initDefaultExpanded = (
  * @returns The TreeViewFilterSection component
  */
 export function TreeViewFilterSection(props: TreeViewSectionProps) {
+  /**
+   * Handles the change events for the checkboxes in the TreeViewFilterSectionItems
+   *
+   * @param checked If the checkbox is checked
+   * @param nodeId The value of the tree node with the checkbox
+   */
+  const handleCheckboxChange = (checked: boolean, nodeId: string) => {
+    let updatedSelectedIds = selectedIds;
+
+    if (checked) {
+      if (isMultiSelect) {
+        updatedSelectedIds = [...selectedIds, nodeId];
+      } else {
+        updatedSelectedIds = [nodeId];
+      }
+    } else {
+      updatedSelectedIds = selectedIds.filter((id) => id !== nodeId);
+    }
+
+    handleSelect(
+      filterKey,
+      updatedSelectedIds,
+      filterSettingsValuesMap,
+      filterSettingsDispatch,
+    );
+  };
+
   const filterSettings = useContext(FilterSettingsContext);
   const filterSettingsDispatch = useContext(FilterSettingsDispatchContext);
   const isMultiSelect = props.multiselect ?? true;
@@ -280,21 +290,19 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
         data-testid={`tree-view-section-${props.sectionid}`}
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
-        multiSelect={isMultiSelect}
-        selected={selectedIds}
+        // multiSelect={isMultiSelect}
+        // selected={selectedIds}
         defaultExpanded={defaultExpanded}
-        onNodeSelect={(event, nodeIds) =>
-          handleSelect(
-            filterKey,
-            nodeIds,
-            filterSettingsValuesMap,
-            filterSettingsDispatch,
-          )
-        }
+        // onNodeSelect={(event, nodeIds) =>
+        //   handleSelect(
+        //     filterKey,
+        //     nodeIds,
+        //     filterSettingsValuesMap,
+        //     filterSettingsDispatch,
+        //   )
+        // }
       >
-        {buildTreeView(props, selectedIds, (checked, nodeId) => {
-          // handleCheckboxSelect(filterKey, nodeId, filterSettingsValuesMap, filterSettingsDispatch);
-        })}
+        {buildTreeView(props, selectedIds, handleCheckboxChange)}
       </TreeView>
     </Box>
   );
