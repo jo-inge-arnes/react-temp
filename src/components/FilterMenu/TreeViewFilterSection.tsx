@@ -14,7 +14,8 @@ import { FilterSettingsDispatchContext } from "./FilterSettingsReducer";
 import { FilterSettingsAction } from "./FilterSettingsReducer";
 import { FilterSettingsActionType } from "./FilterSettingsReducer";
 import Checkbox from "@mui/material/Checkbox";
-import Typography from "@mui/material/Typography";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 /**
  * The structure of a node in the tree data used with the TreeViewFilterSection component
@@ -56,6 +57,8 @@ const buildTreeLevel = (
   treeData: TreeViewFilterSectionNode[],
   filterKey: string,
   prefix: string,
+  selectedIds: string[],
+  handleCheckboxChange: (checked: boolean, value: string) => void,
 ) => {
   return treeData.map((node, index) => {
     const position = prefix ? `${prefix}-${index}` : `${index}`;
@@ -66,13 +69,34 @@ const buildTreeLevel = (
         data-testid={`tree-view-section-item-${node.nodeValue.value}`}
         nodeId={node.nodeValue.value}
         label={
-          <>
-            <Checkbox />
-            {node.nodeValue.valueLabel}
-          </>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  key={`checkbox-${filterKey}-${node.nodeValue.value}-${position}`}
+                  data-testid={`checkbox-tree-view-section-item-${node.nodeValue.value}`}
+                  checked={selectedIds.includes(node.nodeValue.value)}
+                  onChange={(event) => {
+                    handleCheckboxChange(
+                      event.target.checked,
+                      node.nodeValue.value,
+                    );
+                  }}
+                />
+              }
+              label={node.nodeValue.valueLabel}
+            />
+          </FormGroup>
         }
       >
-        {node.children && buildTreeLevel(node.children, filterKey, position)}
+        {node.children &&
+          buildTreeLevel(
+            node.children,
+            filterKey,
+            position,
+            selectedIds,
+            handleCheckboxChange,
+          )}
       </TreeItem>
     );
   });
@@ -84,8 +108,22 @@ const buildTreeLevel = (
  * @param props
  * @returns The TreeItem components for the TreeView
  */
-export const buildTreeView = (props: TreeViewSectionProps) => {
-  return <>{buildTreeLevel(props.treedata, props.filterkey, "")}</>;
+export const buildTreeView = (
+  props: TreeViewSectionProps,
+  selectedIds: string[],
+  handleCheckboxChange: (checked: boolean, value: string) => void,
+) => {
+  return (
+    <>
+      {buildTreeLevel(
+        props.treedata,
+        props.filterkey,
+        "",
+        selectedIds,
+        handleCheckboxChange,
+      )}
+    </>
+  );
 };
 
 /**
@@ -254,7 +292,9 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
           )
         }
       >
-        {buildTreeView(props)}
+        {buildTreeView(props, selectedIds, (checked, nodeId) => {
+          // handleCheckboxSelect(filterKey, nodeId, filterSettingsValuesMap, filterSettingsDispatch);
+        })}
       </TreeView>
     </Box>
   );
