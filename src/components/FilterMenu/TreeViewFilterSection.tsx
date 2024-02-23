@@ -215,31 +215,38 @@ export const selectionHandlerFunc = (
 
     if (checked) {
       if (isMultiSelect) {
+        // TODO: Control must support an optional maximum allowed selections.
         updatedSelectedIds = [...selectedIds, nodeId];
       } else {
         updatedSelectedIds = [nodeId];
       }
+
+      const selectedFilterSettingValues = updatedSelectedIds
+        .map((nodeId) => filterSettingsValuesMap.get(nodeId))
+        .filter((value) => value !== undefined)
+        .flat() as TreeViewFilterSettingsValue[];
+
+      filterSettingsDispatch({
+        type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
+        sectionSetting: {
+          key: filterKey,
+          values: selectedFilterSettingValues.map((value) => {
+            return {
+              value: value.value,
+              valueLabel: value.valueLabel,
+            };
+          }),
+        },
+      });
     } else {
-      updatedSelectedIds = selectedIds.filter((id) => id !== nodeId);
+      filterSettingsDispatch({
+        type: FilterSettingsActionType.DEL_SECTION_SELECTIONS,
+        sectionSetting: {
+          key: filterKey,
+          values: [{ value: nodeId, valueLabel: "" }],
+        },
+      });
     }
-
-    const selectedFilterSettingValues = updatedSelectedIds
-      .map((nodeId) => filterSettingsValuesMap.get(nodeId))
-      .filter((value) => value !== undefined)
-      .flat() as TreeViewFilterSettingsValue[];
-
-    filterSettingsDispatch({
-      type: FilterSettingsActionType.SET_SECTION_SELECTIONS,
-      sectionSetting: {
-        key: filterKey,
-        values: selectedFilterSettingValues.map((value) => {
-          return {
-            value: value.value,
-            valueLabel: value.valueLabel,
-          };
-        }),
-      },
-    });
   };
 };
 

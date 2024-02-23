@@ -6,7 +6,6 @@ import RadioGroupFilterSection from "./RadioGroupFilterSection";
 import TreeViewFilterSection, {
   TreeViewFilterSectionNode,
 } from "./TreeViewFilterSection";
-import { Radio } from "@mui/material";
 
 /**
  * The options for the radio group filter sections.
