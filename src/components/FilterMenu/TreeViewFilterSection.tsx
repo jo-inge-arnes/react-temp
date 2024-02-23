@@ -15,7 +15,8 @@ import { FilterSettingsActionType } from "./FilterSettingsReducer";
 import { TreeViewFilterSectionItem } from "./TreeViewFilterSectionItem";
 
 /**
- * The structure of a node in the tree data used with the TreeViewFilterSection component
+ * The structure of a node in the tree data used with the TreeViewFilterSection
+ * component
  */
 export type TreeViewFilterSectionNode = {
   nodeValue: FilterSettingsValue;
@@ -24,17 +25,18 @@ export type TreeViewFilterSectionNode = {
 
 /**
  * Same as FilterSettingsValue with the addition of a property with the
- * parent ids.
+ * parent ids as an array of strings.
  */
 export type TreeViewFilterSettingsValue = FilterSettingsValue & {
   parentIds: string[];
 };
 
 /**
- * Props for the TreeViewFilterSection component, which extends the FilterMenuSectionProps
- * used with the FilterMenu component. Accepts the treeData prop, which is an array of
- * TreeViewFilterSectionNode objects that represent the tree structure of the filter options.
- * Also accepts the multiselect prop, which is a boolean that determines whether the filter
+ * Props for the TreeViewFilterSection component, which extends the
+ * FilterMenuSectionProps used with the FilterMenu component. Accepts the
+ * treeData prop, which is an array of TreeViewFilterSectionNode objects
+ * representing the tree structure of the filter options. Also accepts the
+ * multiselect prop, which is a boolean that determines whether the filter
  * is single or multi-select.
  */
 export type TreeViewSectionProps = FilterMenuSectionProps & {
@@ -46,20 +48,18 @@ export type TreeViewSectionProps = FilterMenuSectionProps & {
  * Recursive function that builds the TreeView from the tree data one level at a time
  *
  * @param treeData The tree data with the TreeViewFilterSectionNode structure
- * @param filterKey The filter key for the section
- * @param prefix The hyphen-separated indices of the parent node's position in the tree
+ * @param selectedIds The ids (values) of the currently selected nodes
+ * @param filterKey The key for the filter section
+ * @param handleCheckboxChange The function to handle the checkbox click events
  * @returns A tree view item for the corrent node and its children
  */
 const buildTreeLevel = (
   treeData: TreeViewFilterSectionNode[],
-  filterKey: string,
-  prefix: string,
   selectedIds: string[],
+  filterKey: string,
   handleCheckboxChange: (checked: boolean, value: string) => void,
 ) => {
-  return treeData.map((node, index) => {
-    const position = prefix ? `${prefix}-${index}` : `${index}`;
-
+  return treeData.map((node) => {
     return (
       <TreeViewFilterSectionItem
         key={`tree-view-item-${filterKey}-${node.nodeValue.value}`}
@@ -71,9 +71,8 @@ const buildTreeLevel = (
         {node.children &&
           buildTreeLevel(
             node.children,
-            filterKey,
-            position,
             selectedIds,
+            filterKey,
             handleCheckboxChange,
           )}
       </TreeViewFilterSectionItem>
@@ -82,9 +81,11 @@ const buildTreeLevel = (
 };
 
 /**
- * Function that builds the TreeView from the tree data
+ * Function for building a TreeView from tree data
  *
- * @param props
+ * @param props TreeViewSectionProps with the treedata, etc.
+ * @param selectedIds The ids (values) of the currently selected nodes
+ * @param handleCheckboxChange The function to handle the checkbox click events
  * @returns The TreeItem components for the TreeView
  */
 export const buildTreeView = (
@@ -96,9 +97,8 @@ export const buildTreeView = (
     <>
       {buildTreeLevel(
         props.treedata,
-        props.filterkey,
-        "",
         selectedIds,
+        props.filterkey,
         handleCheckboxChange,
       )}
     </>
@@ -114,11 +114,7 @@ export const buildTreeView = (
 export const getSelectedNodeIds = (
   values: FilterSettingsValue[] | undefined,
 ) => {
-  if (!values) {
-    return [];
-  }
-
-  return values.map((value) => value.value);
+  return values ? values.map((value) => value.value) : [];
 };
 
 /**
@@ -197,7 +193,17 @@ export const initDefaultExpanded = (
   return defaultExpanded;
 };
 
-const selectionHandlerBuilder = (
+/**
+ * Function that returns a function to handle checkbox change events
+ *
+ * @param selectedIds The ids (values) of the currently selected nodes
+ * @param filterKey The key for the filter section
+ * @param isMultiSelect Whether the tree is multi- or single select
+ * @param filterSettingsValuesMap Map for looking up FilterSettingValues by ids
+ * @param filterSettingsDispatch Dispatch function for the filter settings reducer
+ * @returns A handler updating the selected nodes, which take a boolean and a node id (value) as input
+ */
+export const selectionHandlerFunc = (
   selectedIds: string[],
   filterKey: string,
   isMultiSelect: boolean,
@@ -238,8 +244,9 @@ const selectionHandlerBuilder = (
 };
 
 /**
- * Component for use with the FilterMenu component, which uses a TreeView to display filter options.
- * The component can be used for either single or multi-select filters.
+ * Component for use with the FilterMenu component, which uses a TreeView to
+ * display filter options. The component can be used for either single or
+ * multi-select filters.
  *
  * @param props The props for the TreeViewFilterSection
  * @returns The TreeViewFilterSection component
@@ -259,7 +266,8 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
     initDefaultExpanded(selectedIds, filterSettingsValuesMap),
   );
 
-  const handleCheckboxChange = selectionHandlerBuilder(
+  // selectionHandlerFunc returns a handler-function for checkbox events
+  const handleCheckboxClick = selectionHandlerFunc(
     selectedIds,
     filterKey,
     isMultiSelect,
@@ -276,7 +284,7 @@ export function TreeViewFilterSection(props: TreeViewSectionProps) {
         defaultExpandIcon={<ChevronRightIcon />}
         defaultExpanded={defaultExpanded}
       >
-        {buildTreeView(props, selectedIds, handleCheckboxChange)}
+        {buildTreeView(props, selectedIds, handleCheckboxClick)}
       </TreeView>
     </Box>
   );

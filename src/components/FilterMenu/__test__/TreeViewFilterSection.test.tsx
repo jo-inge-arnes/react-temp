@@ -4,7 +4,6 @@ import { render, screen, within } from "@testing-library/react";
 import TreeViewFilterSection, {
   flattenTreeValues,
   getSelectedNodeIds,
-  handleSelect,
   initDefaultExpanded,
   initFilterSettingsValuesMap,
 } from "../TreeViewFilterSection";
