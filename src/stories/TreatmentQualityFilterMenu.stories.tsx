@@ -7,7 +7,6 @@ import TreatmentQualityFilterMenu, {
 
 import medicalFieldsJson from "./data/medicalfields.json";
 import unitnames from "./data/unitnames.json";
-import { TreeViewFilterSectionNode } from "@/components/FilterMenu/TreeViewFilterSection";
 
 /**
  * Transforms a JSON obtained from the info/medicalFields API-endpoint to a
@@ -80,6 +79,7 @@ export const Primary: Story = {
   args: {
     medicalfields: medicalFields,
     treatmentunitstree: treatmentUnitsOptions,
+    maxtreatmentunits: 5,
     onSelectionChanged: (newFilterSettings) => {
       console.log(newFilterSettings);
     },

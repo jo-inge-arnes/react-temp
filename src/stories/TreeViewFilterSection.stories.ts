@@ -86,3 +86,13 @@ export const InitialSelections: Story = {
     accordion: "false",
   },
 };
+
+export const MaxiumNumberOfSelections: Story = {
+  args: {
+    sectionid: "behandlingsenheter",
+    sectiontitle: "Behandlingsenheter",
+    filterkey: "treeviewfiltersection",
+    maxselections: 2,
+    treedata: treeData,
+  },
+};
